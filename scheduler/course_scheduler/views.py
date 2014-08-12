@@ -154,7 +154,6 @@ def return_test(request):
     return None;
 
 def new_search(request):
-    logging.basicConfig(filename='logs/new_search_log', level=logging.DEBUG)
     logging.debug('GOT A REQUEST')
     toSend = {}
     if request.method == 'GET':
