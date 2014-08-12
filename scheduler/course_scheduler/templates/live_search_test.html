@@ -7,6 +7,12 @@
 	<meta name="viewport" content="width=device-width, intial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/scheduler.css">
+	<script>
+	$('body').scrollspy({
+		target: '.side-searchbar'
+		offset: 40
+		});
+	</script>
 	
 	<script type="text/javascript">
 	function searchSuccess(data, textState, jqXHR)
@@ -25,7 +31,11 @@
 	<h1>Scheduler!</h1>
 	
 	 <div class="col-sm-10"> Here goes the schedule!</div> 
-	 <div class="col-sm-2">
+	 
+	</div>
+	
+	<div id="sidebar-wrapper" >
+	<div class="col-sm-2 side-searchbar">
 			<div class="row sm-bottom-margin">
 				<input type="text" id="course_search" class="form-control" placeholder="Search" type="search" onkeyup="search()"> 
 			</div>

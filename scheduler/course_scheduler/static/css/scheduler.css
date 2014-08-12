@@ -13,3 +13,9 @@
 {
 	margin-bottom:10px
 }
+
+.side-searchbar
+{
+	position: fixed
+	overflow-y: scroll
+}

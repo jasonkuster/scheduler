@@ -180,7 +180,7 @@ def new_search(request):
 ##            else:
 ##                toSend[c] = False
     else:
-        form = SearchForm()
+        return None
     
     response = render(request, 'search_result.html', {'classes' : toSend})
     #logging.debug('RETURNING')
