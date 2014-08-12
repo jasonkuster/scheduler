@@ -162,7 +162,7 @@ def new_search(request):
         #TODO better regexes
         #patt = re.compile('(\w\w\w\w ((\w\w\w)|(\w\w\w\w)))|(\w\w\w\w\w\w\w)')
 ##       patt = re.compile('(\w\w\w\w( )*(\d+|(\d+w)))')
-##        criterion = request.GET['criterion']
+        criterion = request.GET['criterion']
 ##        if patt.match(criterion):
 ##            str = string.replace(criterion, ' ', '')
 ##            arr = [None]*2
