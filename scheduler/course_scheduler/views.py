@@ -161,7 +161,7 @@ def new_search(request):
         #criterion = request.GET.get('Search', None)
         #TODO better regexes
         #patt = re.compile('(\w\w\w\w ((\w\w\w)|(\w\w\w\w)))|(\w\w\w\w\w\w\w)')
-        patt = re.compile('(\w\w\w\w( )*(\d+|(\d+w)))')
+##       patt = re.compile('(\w\w\w\w( )*(\d+|(\d+w)))')
         criterion = request.GET['criterion']
 ##        if patt.match(criterion):
 ##            str = string.replace(criterion, ' ', '')
@@ -172,13 +172,13 @@ def new_search(request):
 ##            classes = Instructs.objects.filter(meeting__meeting_class__dept__icontains=arr[0], meeting__meeting_class__class_number__icontains=arr[1])
 ##        else:
         classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion) | Q(meeting__meeting_class__dept__icontains=criterion) | Q(meeting__meeting_class__class_number__icontains=criterion))
-        numb = len(Class.objects.all())
 
         for c in classes:
-            if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
-                toSend[c] = True
-            else:
-                toSend[c] = False
+            toSend[c] = True
+##            if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
+##                toSend[c] = True
+##            else:
+##                toSend[c] = False
     else:
         form = SearchForm()
     
