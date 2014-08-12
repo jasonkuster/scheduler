@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/scheduler.css">
 	<script>
 	$('body').scrollspy({
-		target: '.side-searchbar'
+		target: '.search-wrapper'
 		offset: 20
 		});
 	</script>
@@ -27,12 +27,15 @@
 	</script>
 </head>
 <body>
-	<div class="side-searchbar">
-			<div class="row sm-bottom-margin">
+<div id="search-wrapper" class="search-wrapper">
+	<div class="row sm-bottom-margin">
 				<input type="text" id="course_search" class="form-control" placeholder="Search" type="search" onkeyup="search()"> 
 			</div>
+	<div class="side-searchbar">
+			
 			
 			<div class="row" id="search_result"></div>
+	</div>
 	</div>
 	<div class="container"> 
 	<div class="row">
