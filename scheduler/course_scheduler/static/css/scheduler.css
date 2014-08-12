@@ -1,23 +1,23 @@
 @charset "utf-8";
 .no-buffer 
 {
-	margin-bottom:0px
+	margin-bottom:0px;
 }
 
 .no-padding
 {
-	padding:0px
+	padding:0px;
 }
 
 .sm-bottom-margin
 {
-	margin-bottom:10px
+	margin-bottom:10px;
 }
 
 .side-searchbar
 {
-	position: fixed
-	overflow-y: scroll
-	height: calc(100% - 20px)
-	float: right
+	position: fixed;
+	overflow-y: scroll;
+	height: calc(100% - 20px);
+	float: right;
 }
