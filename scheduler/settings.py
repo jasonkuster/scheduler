@@ -139,19 +139,19 @@ INSTALLED_APPS = (
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/logs',
-        },
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
+    # 'disable_existing_loggers': False,
+    # 'handlers': {
+        # 'file': {
+            # 'level': 'DEBUG',
+            # 'class': 'logging.FileHandler',
+            # 'filename': '/logs',
+        # },
+    # },
+    # 'loggers': {
+        # 'django.request': {
+            # 'handlers': ['file'],
+            # 'level': 'DEBUG',
+            # 'propagate': True,
+        # },
+    # },
 }
