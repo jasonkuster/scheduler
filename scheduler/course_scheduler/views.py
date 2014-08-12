@@ -171,10 +171,10 @@ def new_search(request):
 ##            #arr = criterion.split(' ')
 ##            classes = Instructs.objects.filter(meeting__meeting_class__dept__icontains=arr[0], meeting__meeting_class__class_number__icontains=arr[1])
 ##        else:
-##        classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion) | Q(meeting__meeting_class__dept__icontains=criterion) | Q(meeting__meeting_class__class_number__icontains=criterion))
+        classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion) | Q(meeting__meeting_class__dept__icontains=criterion) | Q(meeting__meeting_class__class_number__icontains=criterion))
 
-##        for c in classes:
-##            toSend[c] = True
+        for c in classes:
+            toSend[c] = True
 ##            if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
 ##                toSend[c] = True
 ##            else:
