@@ -20,13 +20,6 @@
 	margin-bottom: 1px;
 	margin-top: 1px;
 }
-
-.nearly-fills-width
-{
-	margin-left: 1px;
-	width: calc(100% - 2px);
-}
-
 .sm-bottom-margin
 {
 	margin-bottom:10px;
