@@ -24,9 +24,9 @@
 {
 	margin-bottom: 1px;
 	margin-top: 1px;
+	margin-right: 2px;
+	margin-left: 2px;
 	width: calc(100% - 4px);
-	right: 2;
-	left: 2;
 }
 .sm-bottom-margin
 {
