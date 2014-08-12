@@ -154,25 +154,25 @@ def return_test(request):
     return None;
 
 def new_search(request):
-    logging.debug('GOT A REQUEST')
+    #logging.debug('GOT A REQUEST')
     toSend = {}
     if request.method == 'GET':
-        logging.debug('IT IS A GET')
+        #logging.debug('IT IS A GET')
         #criterion = request.GET.get('Search', None)
         #TODO better regexes
         #patt = re.compile('(\w\w\w\w ((\w\w\w)|(\w\w\w\w)))|(\w\w\w\w\w\w\w)')
         patt = re.compile('(\w\w\w\w( )*(\d+|(\d+w)))')
         criterion = request.GET['criterion']
-        if patt.match(criterion):
-            str = string.replace(criterion, ' ', '')
-            arr = [None]*2
-            arr[0] = str[0:3]
-            arr[1] = str[4:]
-            #arr = criterion.split(' ')
-            classes = Instructs.objects.filter(meeting__meeting_class__dept__icontains=arr[0], meeting__meeting_class__class_number__icontains=arr[1])
-        else:
-            classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion) | Q(meeting__meeting_class__dept__icontains=criterion) | Q(meeting__meeting_class__class_number__icontains=criterion))
-            numb = len(Class.objects.all())
+##        if patt.match(criterion):
+##            str = string.replace(criterion, ' ', '')
+##            arr = [None]*2
+##            arr[0] = str[0:3]
+##            arr[1] = str[4:]
+##            #arr = criterion.split(' ')
+##            classes = Instructs.objects.filter(meeting__meeting_class__dept__icontains=arr[0], meeting__meeting_class__class_number__icontains=arr[1])
+##        else:
+        classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion) | Q(meeting__meeting_class__dept__icontains=criterion) | Q(meeting__meeting_class__class_number__icontains=criterion))
+        numb = len(Class.objects.all())
 
         for c in classes:
             if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
@@ -183,7 +183,7 @@ def new_search(request):
         form = SearchForm()
     
     response = render(request, 'search_result.html', {'classes' : toSend})
-    logging.debug('RETURNING')
+    #logging.debug('RETURNING')
     return response
 
 #   The info view is called whenever
