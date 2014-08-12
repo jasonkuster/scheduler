@@ -21,7 +21,8 @@
 	margin-right: 10px;
 	margin-left: 10px;
 	height: calc(100% - 40px);
-	float: right;
+	right: 0;
+	left: auto;
 }
 
 .side-searchbar
