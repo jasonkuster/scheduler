@@ -9,6 +9,18 @@
 	padding:0px;
 }
 
+.no-vertical-padding
+{
+	padding-bottom:0px;
+	padding-top:0px;
+}
+
+.vertical-margin-xs
+{
+	margin-bottom: 1px;
+	margin-top: 1px;
+}
+
 .sm-bottom-margin
 {
 	margin-bottom:10px;
