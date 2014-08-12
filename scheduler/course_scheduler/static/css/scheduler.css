@@ -17,8 +17,16 @@
 
 .vertical-margin-xs
 {
+	
+}
+
+.result-well
+{
 	margin-bottom: 1px;
 	margin-top: 1px;
+	width: calc(100% - 4px);
+	right: 2;
+	left: 2;
 }
 .sm-bottom-margin
 {
