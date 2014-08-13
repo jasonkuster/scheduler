@@ -17,6 +17,7 @@
 	<script type="text/javascript">
 	function searchSuccess(data, textState, jqXHR)
 	{
+		$('body').append('done');
 		handleSearchResultJson.html(JSON.parse(data));
 	}
 	
@@ -47,6 +48,7 @@
 	
 	function search()
 	{
+		$('body').append('searching');
 		$.getJson("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess);
 	}
 	</script>
