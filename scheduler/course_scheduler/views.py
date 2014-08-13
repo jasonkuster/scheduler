@@ -189,7 +189,7 @@ def return_test(request):
 def search(request):
     #logging.debug('GOT A REQUEST')
     toSend = {}
-    if request.method == 'GET'
+    if request.method == 'GET':
         #logging.debug('IT IS A GET')
         #criterion = request.GET.get('Search', None)
         #TODO better regexes
@@ -211,13 +211,13 @@ def search(request):
                                            Q(meeting__meeting_class__class_number__icontains=criterion) |
                                            Q(meeting__meeting_class__instructor__icontains=criterion))
 
-        for c in classes
+        for c in classes:
             toSend[c.pk] = False
 ##            if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists()
 ##                toSend[c] = True
 ##            else
 ##                toSend[c] = False
-    else
+    else:
         return None
 
     response_data = {}
