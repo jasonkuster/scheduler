@@ -77,7 +77,7 @@
 	function search()
 	{
 		$('#cont').append("hey");
-		$.getJson("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess);
+		$.getJSON("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess);
 		$('#cont').append("hey2");
 	}
 	</script>
