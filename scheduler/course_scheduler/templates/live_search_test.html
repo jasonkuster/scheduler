@@ -48,7 +48,7 @@
 	
 	function search()
 	{
-		alert('searching');
+		$.alert('searching');
 		$.getJson("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess, 'html');
 	}
 	</script>
