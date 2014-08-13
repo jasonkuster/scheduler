@@ -9,7 +9,7 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-with open('settings.json') as settings_file:
+with open('settings.secret') as settings_file:
     db_settings = json.load(settings_file)
 
 DATABASES = {
