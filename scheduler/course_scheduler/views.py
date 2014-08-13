@@ -188,10 +188,10 @@ def return_test(request):
 ##    return response
 
 def search(request):
-    logging.debug('GOT A REQUEST')
+    #logging.debug('GOT A REQUEST')
     toSend = {}
     if request.method == 'GET':
-        logging.debug('IT IS A GET')
+        #logging.debug('IT IS A GET')
         #criterion = request.GET.get('Search', None)
         #TODO better regexes
         #patt = re.compile('(wwww ((www)(wwww)))(wwwwwww)')
@@ -205,6 +205,8 @@ def search(request):
 ##            #arr = criterion.split(' ')
 ##            classes = Instructs.objects.filter(meeting__meeting_class__dept__icontains=arr[0], meeting__meeting_class__class_number__icontains=arr[1])
 ##        else
+
+        response = render(request, 'add.html', {'classes' : toSend, 'id' : id, 'form' : SearchForm()})
         classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion) |
                                            Q(meeting__meeting_class__dept__icontains=criterion) |
                                            Q(meeting__meeting_class__class_number__icontains=criterion) |
@@ -225,7 +227,7 @@ def search(request):
     response_data['criterion'] = criterion
     response = HttpResponse(json.dumps(response_data), content_type="application/json")
    ## response = render(request, 'search_result.html', {'classes'  toSend})
-    logging.debug('RETURNING')
+    #logging.debug('RETURNING')
     return response
 
 #   The info view is called whenever

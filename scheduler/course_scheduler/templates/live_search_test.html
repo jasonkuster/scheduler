@@ -7,7 +7,6 @@
 	<meta name="viewport" content="width=device-width, intial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/scheduler.css">
-	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 	<script>
 	$('body').scrollspy({
 		target: '.search-wrapper'
@@ -15,47 +14,21 @@
 		});
 	</script>
 	
-	<script id="test-template" type="text/x-jquery-tmpl">
-	HEYTHEREMAN
-	{% for result in courses %}
-		<div class="well well-sm result-well panel panel-default">
-			<div class="panel-body no-vertical-padding">
-			<div class="col-sm-8">
-				<div class="row">
-				{{result.meeting.meeting_class.dept}} {{result.meeting.meeting_class.class_number}}
-				</div>
-				<div class="row">
-				{{result.meeting.recur_type}} {{result.meeting.start_time}} - {{result.meeting.end_time}}
-				</div>
-			</div>
-
-			<div class="col-sm-4">
-				<div class="row">
-				<button type="button" class="btn btn-danger btn-xs">Add</button>
-				<button type="button" class="btn btn-info btn-xs">Info</button>
-				</div>
-			</div>
-			</div>
-		</div>
-		
-	{% endfor %}
-	</script>
-	
 	<script type="text/javascript">
 	function searchSuccess(data, textState, jqXHR)
 	{
-		$('#test-template').tmpl(data).appendTo('#result-wrapper');
+		$('body').append('done');
+		handleSearchResultJson.html(JSON.parse(data));
 	}
-	</script>
 	
-	<script type="text/javascript">
 	function handleSearchResultJson(data)
 	{
-		$.each(data.courses, displayResult);
+		if (JSON.stringify(data.criterion) === JSON.stringify($("#course_search").val())
+		{
+			$.each(data.courses, displayResult);
+		}
 	}
-	</script>
 	
-	<script type="text/javascript">
 	function displayResult(index, course)
 	{
 		$("result-wrapper").append(
@@ -63,23 +36,20 @@
 			"<div class='panel-body no-vertical-padding'>" +
 			"<div class='col-sm-8'>" +
 				"<div class='row'>" +
-				course.meeting.meeting_class.dept + result.meeting.meeting_class.class_number +
+				JSON.stringify(course.meeting.meeting_class.dept) + JSON.stringify(result.meeting.meeting_class.class_number) +
 				"</div> <div class='row'>"
-				course.meeting.recur_type + result.meeting.start_time + "-" + result.meeting.end_time +
+				JSON.stringify(course.meeting.recur_type) + JSON.stringify(result.meeting.start_time) + "-" + JSON.stringify(result.meeting.end_time) +
 				"</div></div><div class='col-sm-4'>" +
 				"<div class='row'>" +
 				"<button type='button' class='btn btn-danger btn-xs'>Add</button>" +
 				"<button type='button' class='btn btn-info btn-xs'>Info</button>" +
 				"</div></div></div></div>");
 	}
-	</script>
 	
-	<script>
 	function search()
 	{
-		$('#cont').append("hey");
-		$.getJSON("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess);
-		$('#cont').append("hey2");
+		$('body').append('searching');
+		$.getJson("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess);
 	}
 	</script>
 </head>
@@ -87,11 +57,11 @@
 <div id="search-wrapper" class="search-wrapper">
 	<input type="text" id="course_search" class="form-control" placeholder="Search" type="search" onkeyup="search()"> 
 	<div class="side-searchbar">
-			<div id="result-wrapper"> </div>
+			<div class="result-wrapper"> </div>
 			<div class="row" id="search_result"></div>
 	</div>
 	</div>
-	<div class="container" id="cont"> 
+	<div class="container"> 
 	<div class="row">
 	<h1>Scheduler!</h1>
 		 <div class="col-sm-10"> Here goes the schedule!</div> 
