@@ -19,12 +19,16 @@
 	{
 		handleSearchResultJson.html(data);
 	}
+	</script>
 	
+	<script type="text/javascript">
 	function handleSearchResultJson(data)
 	{
 		$.each(data.courses, displayResult);
 	}
+	</script>
 	
+	<script type="text/javascript">
 	function displayResult(index, course)
 	{
 		$("result-wrapper").append(
@@ -41,11 +45,13 @@
 				"<button type='button' class='btn btn-info btn-xs'>Info</button>" +
 				"</div></div></div></div>");
 	}
+	</script>
 	
+	<script>
 	function search()
 	{
 		$("container").append("hey");
-		$.getJson("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess);
+		<!--$.getJson("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess);-->
 	}
 	</script>
 </head>
