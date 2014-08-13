@@ -1,4 +1,5 @@
 # Django settings for sampleDjango project.
+import json
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -8,6 +9,8 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+with open('settings.json') as settings_file:
+    db_settings = json.load(settings_file)
 
 DATABASES = {
 #    'default': {
@@ -22,10 +25,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'django_scheduler',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'scheduleradmin',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'USER': db_settings['username'],                      # Not used with sqlite3.
+        'PASSWORD': db_settings['password'],                  # Not used with sqlite3.
+        'HOST': db_settings.get('host', ''),                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': db_settings.get('port', ''),                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 

@@ -9,5 +9,6 @@
 *.gz
 *.dvi
 local_settings.py
+*.json
 stuarts/
 soc/
