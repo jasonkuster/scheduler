@@ -205,8 +205,6 @@ def search(request):
 ##            #arr = criterion.split(' ')
 ##            classes = Instructs.objects.filter(meeting__meeting_class__dept__icontains=arr[0], meeting__meeting_class__class_number__icontains=arr[1])
 ##        else
-
-        response = render(request, 'add.html', {'classes' : toSend, 'id' : id, 'form' : SearchForm()})
         classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion) |
                                            Q(meeting__meeting_class__dept__icontains=criterion) |
                                            Q(meeting__meeting_class__class_number__icontains=criterion) |
