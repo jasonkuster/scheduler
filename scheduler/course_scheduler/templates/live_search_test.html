@@ -12,15 +12,11 @@
 		target: '.search-wrapper'
 		offset: 20
 		});
-		
-		alert('hey1');
-		$.alert('hey2');
 	</script>
 	
 	<script type="text/javascript">
 	function searchSuccess(data, textState, jqXHR)
 	{
-		jAlert('Search Success!);
 		handleSearchResultJson.html(data);
 	}
 	
@@ -51,8 +47,7 @@
 	
 	function search()
 	{
-		$.alert('searching');
-		$.getJson("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess, 'html');
+		$.getJson("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess);
 	}
 	</script>
 </head>
