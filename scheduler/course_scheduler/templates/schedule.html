@@ -8,6 +8,7 @@
 <LINK rel="stylesheet" href="{{ STATIC_URL }}print.css" type="text/css" media="print" />
 <script src='/static/js/fullcalendar/lib/jquery.min.js'></script>
 <link rel='stylesheet' href='/static/js/fullcalendar/fullcalendar.css'/>
+<link rel='stylesheet' href='/static/js/fullcalendar/fullcalendar.print.css' type="text/css" media="print"/>
 <script src='/static/js/fullcalendar/lib/moment.min.js'></script>
 <script src='/static/js/fullcalendar/fullcalendar.js'></script>
 <style type='text/css'>
@@ -38,14 +39,15 @@
 
   <div class="content">
   	<p>&nbsp;</p>
-    <h1>Scheduler</h1>
+    <h1>Scheduler - Alpha</h1>
 
 			<div id='calendar' ></div>
 			<script>
 				$('document').ready(function() {
 					$('#calendar').fullCalendar({
 						defaultView: 'agendaWeek',
-						editable: true,
+						defaultDate: '2014-08-25',
+						editable: false,
 						minTime: "08:00:00",
 						maxTime: "22:00:00",
 						allDaySlot: false,

@@ -150,12 +150,6 @@ def event_json(request):
         response.__setitem__('Set-Cookie', cookie)
     return response
 
-def next_weekday(d, weekday):
-    days_ahead = weekday - d.weekday()
-    if days_ahead <= 0: # Target day already happened this week
-        days_ahead += 7
-    return d + datetime.timedelta(days_ahead)
-
 #   The view for add.html. This
 #   view function is a little more
 #   complicated because it sometimes
