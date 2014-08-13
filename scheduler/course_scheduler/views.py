@@ -188,10 +188,10 @@ def return_test(request):
 ##    return response
 
 def search(request):
-    #logging.debug('GOT A REQUEST')
+    logging.debug('GOT A REQUEST')
     toSend = {}
     if request.method == 'GET':
-        #logging.debug('IT IS A GET')
+        logging.debug('IT IS A GET')
         #criterion = request.GET.get('Search', None)
         #TODO better regexes
         #patt = re.compile('(wwww ((www)(wwww)))(wwwwwww)')
@@ -227,7 +227,7 @@ def search(request):
     response_data['criterion'] = criterion
     response = HttpResponse(json.dumps(response_data), content_type="application/json")
    ## response = render(request, 'search_result.html', {'classes'  toSend})
-    #logging.debug('RETURNING')
+    logging.debug('RETURNING')
     return response
 
 #   The info view is called whenever
