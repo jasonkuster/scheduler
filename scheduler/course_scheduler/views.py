@@ -14,6 +14,7 @@ import sys
 import random
 import string
 import logging
+import simplejson
 
 
 sys.path.append(Strings.SYSTEM_PATH_PREFIX + 'application/scheduler/cas/')
@@ -224,7 +225,7 @@ def search(request):
     response_data['courses'] = classes
     response_data['in_schedule'] = toSend
     response_data['criterion'] = criterion
-    response = HttpResponse(json.dumps(response_data), content_type="application/json")
+    response = HttpResponse(simplejson.dumps(response_data), content_type="application/json")
    ## response = render(request, 'search_result.html', {'classes'  toSend})
     #logging.debug('RETURNING')
     return response
