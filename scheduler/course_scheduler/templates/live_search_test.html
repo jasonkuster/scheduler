@@ -20,34 +20,9 @@
 		$("#search_result").html(data);
 	}
 	
-	function handleSearchResultJson(data)
-	{
-		if (JSON.stringify(data.criterion) === JSON.stringify($("#course_search").val())
-		{
-			$.each(data.courses, displayResult);
-		}
-	}
-	
-	function displayResult(index, course)
-	{
-		$("result-wrapper").append(
-		"<div class='well well-sm result-well panel panel-default'>" +
-			"<div class='panel-body no-vertical-padding'>" +
-			"<div class='col-sm-8'>" +
-				"<div class='row'>" +
-				JSON.stringify(course.meeting.meeting_class.dept) + JSON.stringify(result.meeting.meeting_class.class_number) +
-				"</div> <div class='row'>"
-				JSON.stringify(course.meeting.recur_type) + JSON.stringify(result.meeting.start_time) + "-" + JSON.stringify(result.meeting.end_time) +
-				"</div></div><div class='col-sm-4'>" +
-				"<div class='row'>" +
-				"<button type='button' class='btn btn-danger btn-xs'>Add</button>" +
-				"<button type='button' class='btn btn-info btn-xs'>Info</button>" +
-				"</div></div></div></div>");
-	}
-	
 	function search()
 	{
-		$.getJson("/scheduler/new_search/", { 'criterion' : $("#course_search").val() }, searchSuccess, 'html');
+		$.get("/scheduler/new_search/", { 'criterion' : $("#course_search").val() }, searchSuccess, 'html');
 	}
 	</script>
 </head>
@@ -55,7 +30,8 @@
 <div id="search-wrapper" class="search-wrapper">
 	<input type="text" id="course_search" class="form-control" placeholder="Search" type="search" onkeyup="search()"> 
 	<div class="side-searchbar">
-			<div class="result-wrapper"/>
+			
+			
 			<div class="row" id="search_result"></div>
 	</div>
 	</div>
