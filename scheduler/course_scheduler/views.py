@@ -186,7 +186,7 @@ def return_test(request):
 ##    #logging.debug('RETURNING')
 ##    return response
 
-def search(request)
+def search(request):
     #logging.debug('GOT A REQUEST')
     toSend = {}
     if request.method == 'GET'
