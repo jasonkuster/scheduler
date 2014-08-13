@@ -76,8 +76,8 @@
 	<script>
 	function search()
 	{
-		$("container").append("hey");
-		<!--$.getJson("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess);-->
+		$('#cont').append("hey");
+		$.getJson("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess);-->
 	}
 	</script>
 </head>
@@ -89,7 +89,7 @@
 			<div class="row" id="search_result"></div>
 	</div>
 	</div>
-	<div class="container"> 
+	<div class="container" id="cont"> 
 	<div class="row">
 	<h1>Scheduler!</h1>
 		 <div class="col-sm-10"> Here goes the schedule!</div> 
