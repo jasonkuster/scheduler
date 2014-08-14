@@ -14,10 +14,13 @@
 		});
 	</script>-->
 	
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+	
 	<script type="text/javascript">
 	function searchSuccess(data, textState, jqXHR)
 	{
-		var html = data
+		var html = data.text();
 		if (html.substring(0, html.indexof('</span>')).indexof($("#course_search").val()) >= 0)
 		{
 			$("#search_result").html(data);
@@ -45,9 +48,5 @@
 		 <div class="col-sm-10"> Here goes the schedule!</div> 
 	</div>
 	</div>
-	<script src="http://code.jquery.com/jquery.min.js"></script>
-	<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-
-
 </body>
 </html>
