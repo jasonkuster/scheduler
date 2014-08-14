@@ -17,7 +17,10 @@
 	<script type="text/javascript">
 	function searchSuccess(data, textState, jqXHR)
 	{
-		$("#search_result").html(data);
+		if (data.substring(0, data.indexof('</span>')).indexof($("#course_search").val()) >= 0)
+		{
+			$("#search_result").html(data);
+		}
 	}
 	
 	function search()
