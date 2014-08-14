@@ -156,6 +156,7 @@ def return_test(request):
 def new_search(request):
     #logging.debug('GOT A REQUEST')
     toSend = {}
+    criterion = ''
     if request.method == 'GET':
         #logging.debug('IT IS A GET')
         #criterion = request.GET.get('Search', None)
@@ -171,7 +172,9 @@ def new_search(request):
 ##            #arr = criterion.split(' ')
 ##            classes = Instructs.objects.filter(meeting__meeting_class__dept__icontains=arr[0], meeting__meeting_class__class_number__icontains=arr[1])
 ##        else:
-        classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion) | Q(meeting__meeting_class__dept__icontains=criterion) | Q(meeting__meeting_class__class_number__icontains=criterion))
+        classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion)
+                                           | Q(meeting__meeting_class__dept__icontains=criterion)
+                                           | Q(meeting__meeting_class__class_number__icontains=criterion))
 
         for c in classes:
             toSend[c] = True
@@ -182,7 +185,7 @@ def new_search(request):
     else:
         return None
     
-    response = render(request, 'search_result.html', {'classes' : toSend})
+    response = render(request, 'search_result.html', {'classes' : toSend, 'searchid' : criterion})
     #logging.debug('RETURNING')
     return response
 
