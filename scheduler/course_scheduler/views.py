@@ -154,6 +154,7 @@ def return_test(request):
     return None;
 
 #TODO smarter search
+#TODO instructor search
 def new_search(request):
     toSend = {}
     criterion = ''
@@ -170,8 +171,8 @@ def new_search(request):
         else:
             classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion)
                                             | Q(meeting__meeting_class__dept__icontains=criterion)
-                                            | Q(meeting__meeting_class__class_number__icontains=criterion))
-                                            #| Q(meeting__meeting_class__instructor__icontains=criterion))
+                                            | Q(meeting__meeting_class__class_number__icontains=criterion)
+                                            | Q(meeting__instructor__icontains=criterion))
 
         for c in classes:
             toSend[c] = True
