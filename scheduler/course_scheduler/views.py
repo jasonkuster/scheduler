@@ -172,7 +172,7 @@ def new_search(request):
             classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion)
                                             | Q(meeting__meeting_class__dept__icontains=criterion)
                                             | Q(meeting__meeting_class__class_number__icontains=criterion)
-                                            | Q(meeting__instructor__icontains=criterion))
+                                            | Q(instructor__icontains=criterion))
 
         for c in classes:
             toSend[c] = True
