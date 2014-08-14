@@ -25,10 +25,13 @@
 		{
 			$("#search_result").html(data);
 		}
+		else
+		{
+			$("search_result").html('<div><h4>No results found.</h4></div>');
 	}
 	
 	function search()
-	{
+	{	$("#search_result").html('<div class="searching-panel">Searching . . .</div>');
 		$.get("/scheduler/new_search/", { 'criterion' : $("#course_search").val() }, searchSuccess, 'html');
 	}
 	</script>
@@ -39,7 +42,7 @@
 	<div class="side-searchbar">
 			
 			
-			<div class="row" id="search_result"></div>
+			<div id="search_result"></div>
 	</div>
 	</div>
 	<div class="container"> 
