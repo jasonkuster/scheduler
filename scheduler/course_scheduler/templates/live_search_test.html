@@ -27,12 +27,12 @@
 		}
 		else
 		{
-			$("search_result").html('<div><h4>No results found.</h4></div>');
+			$("#search_sidebar").html('<div><h4>No results found.</h4></div>');
 		}
 	}
 	
 	function search()
-	{	$("#search_result").html('<div class="searching-panel">Searching . . .</div>');
+	{	$("#search_sidebar").html('<div class="searching-panel">Searching . . .</div>');
 		$.get("/scheduler/new_search/", { 'criterion' : $("#course_search").val() }, searchSuccess, 'html');
 	}
 	</script>
@@ -40,9 +40,7 @@
 <body>
 <div id="search-wrapper" class="search-wrapper">
 	<input type="text" id="course_search" class="form-control" placeholder="Search" type="search" onkeyup="search()"> 
-	<div class="side-searchbar">
-			
-			
+	<div id="search_sidebar" class="side-searchbar">
 			<div id="search_result"></div>
 	</div>
 	</div>
