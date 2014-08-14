@@ -166,7 +166,7 @@ def new_search(request):
             arr[0] = str[0:3]
             arr[1] = str[4:]
             #arr = criterion.split(' ')
-            classes = Instructs.objects.filter(meeting__meeting_class__dept__icontains=arr[0], meeting__meeting_class__class_number__icontains=arr[1])
+            classes = Instructs.objects.filter(meeting__meeting_class__dept__icontains=arr[0], meeting__meeting_class__class_number__istartswith=arr[1])
         else:
             classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion)
                                             | Q(meeting__meeting_class__dept__icontains=criterion)
