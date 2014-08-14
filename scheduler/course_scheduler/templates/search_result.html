@@ -1,6 +1,6 @@
 <span id={{searchid}}></span>
 
-{% if classes > 0 %}
+{% ifnotequal classes|length 0 %}
 	{% for result, inSchedule in classes.iteritems %}
 			
 		<div class="well well-sm result-well panel panel-default">
