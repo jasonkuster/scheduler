@@ -28,8 +28,12 @@
 	}
 	
 	function search()
-	{	$("#search_result").html('<div class="searching-panel">Searching . . .</div>');
-		$.get("/scheduler/new_search/", { 'criterion' : $("#course_search").val() }, searchSuccess, 'html');
+	{	
+		if (new String($("#course_search").val()).length > 2)
+			{
+				$("#search_result").html('<div class="searching-panel">Searching . . .</div>');
+				$.get("/scheduler/new_search/", { 'criterion' : $("#course_search").val() }, searchSuccess, 'html');
+			}
 	}
 	</script>
 </head>
