@@ -181,7 +181,7 @@ def new_search(request):
  ##           else:
  ##               toSend[c] = False
     else:
-        return None
+        return Http404;
     
     response = render(request, 'search_result.html', {'classes' : toSend, 'searchid' : criterion})
     #logging.debug('RETURNING')
