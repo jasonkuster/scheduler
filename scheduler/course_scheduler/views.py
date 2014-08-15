@@ -158,7 +158,7 @@ def new_search(request):
     #status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/searchtest/')
     toSend = {}
     criterion = ''
-    if request.method == 'GET':
+    if False & request.method == 'GET':
         patt = re.compile('(\w{4}( )*(\d{1,4}|(\d{1.4}w)))')
         criterion = request.GET['criterion']
         if patt.match(criterion):
