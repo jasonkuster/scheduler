@@ -155,13 +155,13 @@ def return_test(request):
 #TODO smarter search
 #TODO instructor search
 def new_search(request):
-    status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/searchtest/')
+    #status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/searchtest/')
     toSend = {}
     criterion = ''
     if request.method == 'GET':
         patt = re.compile('(\w{4}( )*(\d{1,4}|(\d{1.4}w)))')
         criterion = request.GET['criterion']
-        if patt.match(criterion):
+        if False:
             str = string.replace(criterion, ' ', '')
             arr = [None]*2
             arr[0] = str[0:3]
