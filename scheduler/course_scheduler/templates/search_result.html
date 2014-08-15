@@ -9,9 +9,9 @@
 	}
 	</script>
 	
-	{% count %}
+	<!-- {% count %} -->
 	{% for result, inSchedule in classes.iteritems %}
-		{% count = count + 1 %}
+		<!-- {% count = count + 1 %}-->
 			
 		<div class="well well-sm result-well panel panel-default">
 			<div class="panel-body no-vertical-padding">
@@ -30,11 +30,11 @@
 				
 				
 				{% else %}
-				<div id="{{ count }}">
+				<div id="1">
 					<form name="add" action="/scheduler/add_course" method="post">{% csrf_token %}
 					<input type="hidden" name="eventID" value="{{instructs.meeting.id}}"/>
 					<input type="hidden" name="id" value="{{id}}"/>
-					<button type="button" class="btn btn-danger btn-xs" onclick="Add({{ count }})">Add</button>
+					<button type="button" class="btn btn-danger btn-xs" onclick="Add(1)">Add</button>
 					</form>
 				</div>
 				{% endif %}
