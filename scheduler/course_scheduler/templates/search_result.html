@@ -1,7 +1,5 @@
 <span id={{searchid}}></span>
 
-
-
 {% if classes|length > 0 %}
 	<!-- <script>
 	function Add(row_id) {
@@ -32,9 +30,9 @@
 				{% else %}
 				<div id="1">
 					<form name="add" action="/scheduler/add_course" method="post">{% csrf_token %}
-					<input type="hidden" name="eventID" value="{{instructs.meeting.id}}"/>
-					<input type="hidden" name="id" value="{{id}}"/>
-					<button type="button" class="btn btn-danger btn-xs" onclick="Add(1)">Add</button>
+					<input type="hidden" name="eventID" value="{{result.meeting.id}}"/>
+					<input type="hidden" name="id" value="srl51"/>
+					<button type="button" class="btn btn-danger btn-xs">Add</button>
 					</form>
 				</div>
 				{% endif %} -->
