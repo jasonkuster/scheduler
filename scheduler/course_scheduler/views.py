@@ -161,7 +161,7 @@ def new_search(request):
     if request.method == 'GET':
         patt = re.compile('(\w{4}( )*(\d{1,4}|(\d{1.4}w)))')
         criterion = request.GET['criterion']
-        if False:
+        if patt.match(criterion):
             str = string.replace(criterion, ' ', '')
             arr = [None]*2
             arr[0] = str[0:3]
@@ -181,7 +181,7 @@ def new_search(request):
  ##           else:
  ##               toSend[c] = False
     else:
-        return Http404;
+        return render(request, 'search_result.html', {'classes' : toSend, 'searchid' : criterion})
     
     response = render(request, 'search_result.html', {'classes' : toSend, 'searchid' : criterion})
     #logging.debug('RETURNING')
