@@ -1,6 +1,6 @@
 import sys
-import scheduler.course_scheduler
-from scheduler.course_scheduler.strings import Strings
+import course_scheduler
+from course_scheduler.strings import Strings
 
 sys.path.append(Strings.SYSTEM_PATH_PREFIX + 'application/scheduler/cas/')
 import pycas

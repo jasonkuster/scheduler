@@ -1,8 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django import forms
-from scheduler.course_scheduler.models import *
-from scheduler.course_scheduler.strings import Strings
+from course_scheduler.models import *
+from course_scheduler.strings import Strings
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -15,9 +15,10 @@ import random
 import string
 import logging
 
+
 sys.path.append(Strings.SYSTEM_PATH_PREFIX + 'application/scheduler/cas/')
-from scheduler.cas.checklogin import check_login
-from scheduler.cas.checklogin import redirect_to_cas
+from checklogin import check_login
+from checklogin import redirect_to_cas
 
 
 #   The view for schedule.html
@@ -155,8 +156,6 @@ def return_test(request):
 #TODO smarter search
 #TODO instructor search
 def new_search(request):
-    return render(request, '<h4>YOOOOOOOO</h4>')
-    #status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/searchtest/')
     toSend = {}
     criterion = ''
     if request.method == 'GET':
@@ -176,11 +175,11 @@ def new_search(request):
                                             | Q(instructor__name__icontains=criterion))
 
         for c in classes:
-            toSend[c] = False
- ##           if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
- ##               toSend[c] = True
- ##           else:
-   ##             toSend[c] = False
+            toSend[c] = True
+##            if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
+##                toSend[c] = True
+##            else:
+##                toSend[c] = False
     else:
         return None
     
@@ -345,16 +344,6 @@ def inssearch(request):
         return render(request, 'inssearch.html')
     else:
         return render(request, 'inssearch.html', {'id' : id})
-    
-def add_course(request):
-    if request.method == 'POST':
-        eventId = request.POST['eventID']
-        caseId = request.POST['id']
-        stu = Student.objects.get(case_id=caseId)
-        enroll = Enrollment(student_id=stu.pk, event_id=eventId)
-        enroll.save()
-        return HttpResponse('Success', content_type='text/plain')
-    raise Http404
 
 #   The addcourse is a temporary view
 #   that is called when a user click
