@@ -371,6 +371,16 @@ def addcourse(request):
         return HttpResponseRedirect('/scheduler/')
     raise Http404
 
+def add_course(request):
+    if request.method == 'POST':
+        eventId = request.POST['eventID']
+        caseId = request.POST['id']
+        stu = Student.objects.get(case_id=caseId)
+        enroll = Enrollment(student_id=stu.pk, event_id=eventId)
+        enroll.save()
+        return HttpResponse('Success', content_type='text/plain')
+    raise Http404
+
 #   The removecourse is a temporary view
 #   that is called when a user click
 #   an 'remove course' button. The view
