@@ -17,7 +17,7 @@ import logging
 
 sys.path.append(Strings.SYSTEM_PATH_PREFIX + 'application/scheduler/cas/')
 from scheduler.cas.checklogin import check_login
-from scheduler.checklogin import redirect_to_cas
+from scheduler.cas.checklogin import redirect_to_cas
 
 
 #   The view for schedule.html
