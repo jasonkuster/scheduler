@@ -24,14 +24,13 @@
 
 			<div class="col-sm-4">
 				<div class="row">
-				{% if inSchedule %}
-				
-				
+				{% if inSchedule %}				
+				<h4>IN SCHEDULE</h4>
 				{% else %}
 				<div id="a">
 					<form name="add" action="/scheduler/add_course" method="post">{% csrf_token %}
 					<input type="hidden" name="eventID" value="{{result.meeting.id}}"/>
-					<input type="hidden" name="id" value="srl51"/>
+					<input type="hidden" name="id" value="{{student_id}}"/>
 					<button type="button" class="btn btn-danger btn-xs">Add</button>
 					</form>
 				</div>
