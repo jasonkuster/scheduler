@@ -155,6 +155,7 @@ def return_test(request):
 #TODO smarter search
 #TODO instructor search
 def new_search(request):
+    return render(request, '<h4>YOOOOOOOO</h4>')
     #status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/searchtest/')
     toSend = {}
     criterion = ''
@@ -175,10 +176,11 @@ def new_search(request):
                                             | Q(instructor__name__icontains=criterion))
 
         for c in classes:
-            if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
-                toSend[c] = True
-            else:
-                toSend[c] = False
+            toSend[c] = False
+ ##           if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
+ ##               toSend[c] = True
+ ##           else:
+   ##             toSend[c] = False
     else:
         return None
     
