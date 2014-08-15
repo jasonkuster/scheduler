@@ -377,7 +377,8 @@ def add_course(request):
         stu = Student.objects.get(case_id=caseId)
         enroll = Enrollment(student_id=stu.pk, event_id=eventId)
         enroll.save()
-        return HttpResponse('Success', content_type='text/plain')
+        return HttpResponseRedirect('/scheduler/')
+        #return HttpResponse('Success', content_type='text/plain')
     raise Http404
 
 #   The removecourse is a temporary view
