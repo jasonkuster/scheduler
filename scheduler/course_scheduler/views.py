@@ -176,7 +176,6 @@ def new_search(request):
                                             | Q(instructor__name__icontains=criterion))
 
         for c in classes:
-            toSend[c] = False
             if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
                 toSend[c] = True
             else:

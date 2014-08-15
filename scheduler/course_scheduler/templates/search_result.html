@@ -31,7 +31,7 @@
 					<form name="add" action="/scheduler/add_course" method="post">{% csrf_token %}
 					<input type="hidden" name="eventID" value="{{result.meeting.id}}"/>
 					<input type="hidden" name="id" value="{{student_id}}"/>
-					<button type="button" class="btn btn-danger btn-xs">Add</button>
+					<input type="submit" class="btn btn-danger btn-xs" value="Add" />
 					</form>
 				</div>
 				{% endif %}
