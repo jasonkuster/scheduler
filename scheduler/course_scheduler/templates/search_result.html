@@ -41,13 +41,14 @@ function AddSuccess(data, textState, jqXHR)
 				{% if inSchedule %}				
 				<button type="button" class="btn btn-primary btn-xs">Remove</button>
 				{% else %}
-				<div id="a">
+				<!-- <div id="a">
 					<form name="add" method="post">{% csrf_token %}
 					<input type="hidden" name="eventID" value="{{result.meeting.id}}"/>
 					<input type="hidden" name="id" value="{{student_id}}"/>
 					<input type="submit" class="btn btn-danger btn-xs" value="Add" />
 					</form>
-				</div>
+				</div>-->
+				<button type="button" class="btn btn-danger btn-xs">Add</button>
 				{% endif %}
 				<button type="button" class="btn btn-info btn-xs">Info</button>
 				
