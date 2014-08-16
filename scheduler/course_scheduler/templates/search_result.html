@@ -19,7 +19,7 @@
 				<h4>IN SCHEDULE</h4>
 				{% else %}
 				<div id="a">
-					<form name="add" action="/scheduler/add_course" method="post">
+					<form name="add" action="/scheduler/add_course" method="post">{% csrf_token %}
 					<input type="hidden" name="eventID" value="{{result.meeting.id}}"/>
 					<input type="hidden" name="id" value="{{student_id}}"/>
 					<input type="submit" class="btn btn-danger btn-xs" value="Add" />
