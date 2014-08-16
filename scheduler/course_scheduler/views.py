@@ -156,7 +156,7 @@ def return_test(request):
 #TODO smarter search
 #TODO instructor search
 def new_search(request):
-    #status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/searchtest/')
+    status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/searchtest/')
     toSend = {}
     criterion = ''
     if request.method == 'GET':
