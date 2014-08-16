@@ -373,11 +373,11 @@ def addcourse(request):
 def add_course(request):
     if request.method == 'POST':
         eventId = request.POST['eventID']
-        caseId = request.POST['id']
+        caseId = request.POST['studentID']
         stu = Student.objects.get(case_id=caseId)
         enroll = Enrollment(student_id=stu.pk, event_id=eventId)
         enroll.save()
-        return None;
+        return HttpResponse('Success', content_type='text/plain');
         #return HttpResponse('Success', content_type='text/plain')
     raise Http404
 
