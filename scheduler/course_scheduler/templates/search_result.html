@@ -2,6 +2,18 @@
 
 {% if classes|length > 0 %}
 <script>
+function crsfSafeMethod(method) {
+	return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+var csrftoken = $.cookie('csrftoken');
+$.ajaxSetup({
+	beforeSend: function(xhr, settings) {
+		if (!crsfSafeMethod(settings.type) && !this.crossDomain) {
+			xhr.setRequestHeader("X-CSRFToken", csrftoken);
+		}
+	}
+});
+
 function Add(eventID, studentID)
 {
 	$.post("/scheduler/add_course/", { 'eventID' : eventID, 'studentID' : studentID }, addSuccess);	
@@ -27,9 +39,15 @@ function AddSuccess(data, textState, jqXHR)
 			<div class="col-sm-4">
 				<div class="row">
 				{% if inSchedule %}				
-				<h4>IN SCHEDULE</h4>
+				<button type="button" class="btn btn-primary btn-xs">Remove</button>
 				{% else %}
-				<button type="button" class="btn btn-danger btn-xs" action="Add({{result.meeting.id}}, {{student_id}})">Add</button>
+				<div id="a">
+					<form name="add" method="post">{% csrf_token %}
+					<input type="hidden" name="eventID" value="{{result.meeting.id}}"/>
+					<input type="hidden" name="id" value="{{student_id}}"/>
+					<input type="submit" class="btn btn-danger btn-xs" value="Add" />
+					</form>
+				</div>
 				{% endif %}
 				<button type="button" class="btn btn-info btn-xs">Info</button>
 				
