@@ -1,16 +1,7 @@
 <span id={{searchid}}></span>
 
 {% if classes|length > 0 %}
-	<!-- <script>
-	function Add(row_id) {
-		
-	}
-	</script>
-	
-	{% count %} -->
 	{% for result, inSchedule in classes.iteritems %}
-		<!-- {% count = count + 1 %}-->
-			
 		<div class="well well-sm result-well panel panel-default">
 			<div class="panel-body no-vertical-padding">
 			<div class="col-sm-8">
@@ -27,13 +18,7 @@
 				{% if inSchedule %}				
 				<h4>IN SCHEDULE</h4>
 				{% else %}
-				<!-- <div id="a">
-					<form name="add" action="/scheduler/add_course" method="post">{% csrf_token %}
-					<input type="hidden" name="eventID" value="{{result.meeting.id}}"/>
-					<input type="hidden" name="id" value="{{student_id}}"/>
-					<input type="submit" class="btn btn-danger btn-xs" value="Add" />
-					</form>
-				</div>-->
+				<button type="button" class="btn btn-info btn-xs">Add</button>
 				{% endif %}
 				<button type="button" class="btn btn-info btn-xs">Info</button>
 				
