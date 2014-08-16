@@ -183,7 +183,7 @@ def new_search(request):
     else:
         return None
     
-    response = render(request, 'search_result.html', {'classes' : toSend, 'searchid' : criterion, 'student_id' : 'srl51'})
+    response = render(request, 'search_result.html', {'classes' : toSend, 'searchid' : criterion, 'student_id' : id})
     #logging.debug('RETURNING')
     return response
 

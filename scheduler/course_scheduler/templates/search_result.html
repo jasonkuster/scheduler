@@ -18,7 +18,13 @@
 				{% if inSchedule %}				
 				<h4>IN SCHEDULE</h4>
 				{% else %}
-				<button type="button" class="btn btn-info btn-xs">Add</button>
+				<div id="a">
+					<form name="add" action="/scheduler/add_course" method="post">
+					<input type="hidden" name="eventID" value="{{result.meeting.id}}"/>
+					<input type="hidden" name="id" value="{{student_id}}"/>
+					<input type="submit" class="btn btn-danger btn-xs" value="Add" />
+					</form>
+				</div>
 				{% endif %}
 				<button type="button" class="btn btn-info btn-xs">Info</button>
 				
