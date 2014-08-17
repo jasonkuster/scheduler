@@ -37,6 +37,7 @@ function setRemoveButton(eventID, stduentID)
 
 function setAddButton(eventID, stduentID)
 {
+	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
 	var button = button = $("<button>");
 	button.addClass("btn btn-danger btn-xs");
 	button.attr({
