@@ -15,7 +15,7 @@ function AddSuccess(data, textState, jqXHR)
 	button.onclick = Remove(data.eventID, data.studentID);
 	button.innerHTML = "Remove";
 	
-	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone()).html());
+	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
 }
 
 function Remove(eventID, studentID)
@@ -31,7 +31,7 @@ function RemoveSuccess(data, textState, jqXHR)
 	button.onclick = Add(data.eventID, data.studentID);
 	button.innerHTML = "Add";
 	
-	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone()).html());
+	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
 }
 
 
