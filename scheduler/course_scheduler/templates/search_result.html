@@ -83,9 +83,9 @@ function setAddButton(eventID, stduentID)
 			<div class="col-sm-4">
 				<div class="row"></div>
 				{% if inSchedule %}				
-				<button id="button-{{result.meeting.id}}" type="button" class="btn btn-danger btn-xs" onclick="AddOrRemove('{{result.meeting.id}}', '{{student_id}}', this.innerHtml)" value="Remove"></button>
+				<input id="button-{{result.meeting.id}}" type="button" class="btn btn-danger btn-xs" onclick="AddOrRemove('{{result.meeting.id}}', '{{student_id}}', this.value)" value="Remove"></input>
 				{% else %}
-				<button type="button" class="btn btn-success btn-xs" onclick="Add('{{result.meeting.id}}', '{{student_id}}, this.innerHtml')" value="Add"></button>
+				<input type="button" class="btn btn-success btn-xs" onclick="Add('{{result.meeting.id}}', '{{student_id}}', this.value)" value="Add"></input>
 				{% endif %}
 				</div>
 				<div class="row">
