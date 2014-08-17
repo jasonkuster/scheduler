@@ -4,17 +4,24 @@
 <script>
 function Add(eventID, studentID)
 {
-	$.post("/scheduler/add_course/", { 'eventID' : eventID, 'studentID' : studentID }, AddSuccess);	
+	var button = button = $("<button>");
+	button.addClass("btn btn-danger btn-xs");
+	button.attr({
+		type: "button"
+	});
+	button.text("Add");
+	button.on("click", function() {Add(data.eventID, data.studentID);});
 }
 
 function AddSuccess(data, textState, jqXHR)
 {
-	var button = document.createElement("button");
-	button.type="button";
-	button.className = "btn btn-danger btn-xs";
+	var button = button = $("<button>");
+	button.addClass("btn btn-danger btn-xs");
+	button.attr({
+		type: "button"
+	});
+	button.text("Remove");
 	button.on("click", function() {Remove(data.eventID, data.studentID);});
-	button.innerHTML = "Remove";
-	
 	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
 }
 
