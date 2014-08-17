@@ -1,58 +1,7 @@
 <span id={{searchid}}></span>
 
 {% if classes|length > 0 %}
-<script>
-function Add(eventID, studentID)
-{
-	$.post("/scheduler/add_course/", { 'eventID' : eventID, 'studentID' : studentID }, AddSuccess);	
-}
-
-function AddSuccess(data, textState, jqXHR)
-{
-	setRemoveButton(data.eventID, data.studentID);
-}
-
-function Remove(eventID, studentID)
-{
-	$.post("/scheduler/remove_course/", { 'eventID' : eventID, 'studentID' : studentID }, RemoveSuccess);	
-}
-
-function RemoveSuccess(data, textState, jqXHR)
-{
-	setAddButton(data.eventID, data.studentID);
-}
-
-function setRemoveButton(eventID, studentID)
-{
-	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
-	$("#button-".concat(eventID)).html("<button class='btn btn-danger btn-xs' onclick='Remove(&quot;"+ eventID +"&quot;,&quot;"+ studentID+"&quot;)'>Remove</button>");
-}
-
-function setAddButton(eventID, studentID)
-{
-	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
-	$("#button-".concat(eventID)).html("<button class='btn btn-success btn-xs' onclick='Add(&quot;"+ eventID +"&quot;,&quot;"+ studentID+"&quot;)'>Add</button>");
-}
-
-function ShowInfo(eventID)
-{
-	if ($("#info-".concat(eventID)).is(":visible"))
-	{
-		$("#info-".concat(eventID)).hide();
-	}
-	else
-	{
-		$("#info-".concat(eventID)).show();
-	}
-	
-}
-
-function HideInfo(eventID)
-{
-	$("#info-".concat(eventID)).hide();
-}
-
-</script>
+<script src="{{STATIC_URL"js\scheduler.search_result.js></script>
 	{% for result, inSchedule in classes.iteritems %}
 		<div class="well well-sm result-well panel panel-default">
 			<div class="panel-body no-vertical-padding">
@@ -74,7 +23,7 @@ function HideInfo(eventID)
 				{% endif %}
 				</div>
 				<div class="row">
-				<button type="button" class="btn btn-info btn-xs" onclick="ShowInfo({{result.meeting.id}})">Info</button>
+				<button type="button" class="btn btn-info btn-xs" onclick="ToggleInfo({{result.meeting.id}})">Info</button>
 				
 				</div>
 			</div>
@@ -85,7 +34,6 @@ function HideInfo(eventID)
 		<table class="table table-codensed">
 		<tr><td style="padding-left: 15px">Location: {{result.meeting.meeting_location}}</td></tr>
 		<tr><td style="padding-left: 15px">Staff: {{result.instructor.name}}</td></tr>
-		<tr></tr>
 		</table>
 		<div class="panel-body">
 		{{result.meeting.meeting_class.description}}
