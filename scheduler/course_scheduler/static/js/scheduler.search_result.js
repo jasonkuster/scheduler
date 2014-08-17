@@ -34,11 +34,11 @@ function ToggleInfo(eventID)
 {
 	if ($("#info-".concat(eventID)).is(":visible"))
 	{
-		ShowInfo(eventID);
+		HideInfo(eventID);
 	}
 	else
 	{
-		HideInfo(eventID);
+		ShowInfo(eventID);
 	}
 }
 
