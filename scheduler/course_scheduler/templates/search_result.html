@@ -9,7 +9,7 @@ function Add(eventID, studentID)
 
 function AddSuccess(data, textState, jqXHR)
 {
-	setRemoveButton(eventID, studentID);
+	setAddButton(data.eventID, data.studentID);
 }
 
 function Remove(eventID, studentID)
@@ -19,29 +19,33 @@ function Remove(eventID, studentID)
 
 function RemoveSuccess(data, textState, jqXHR)
 {
-	setAddButton(eventID, studentID);
+	setRemoveButton(data.eventID, data.studentID);
 }
 
-function setRemoveButton(eventID, studentID)
+function setRemoveButton(eventID, stduentID)
 {
-	try {throw ''} catch (e) {}
-	var str1 = "<button class='btn btn-danger btn-xs' type='button' onclick='Remove(";
-	var str2 = eventID.val() + ", " + studentID.val();
-	var str3 = ")' >Remove</button>";
-	var html = str1.concat(str2).concat(str3);
-	$("#button-".concat(eventID.val())).html(html);
+	var button = button = $("<button>");
+	button.addClass("btn btn-danger btn-xs");
+	button.attr({
+		type: "button"
+	});
+	button.text("Remove");
+	button.on("click", function() { alert('hey');});
+	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
 }
 
-
-function setAddButton(eventID, studentID)
+function setAddButton(eventID, stduentID)
 {
-	try {throw ''} catch (e) {}
-	var str1 = "<button class='btn btn-success btn-xs' type='button' onclick='Add(";
-	var str2 = new String(eventID) + ", " + new String(studentID);
-	var str3 = ")' >Add</button>";
-	var html = str1.concat(str2).concat(str3);
-	$("#button-".concat(new String(eventID))).html(html);
+	var button = button = $("<button>");
+	button.addClass("btn btn-danger btn-xs");
+	button.attr({
+		type: "button"
+	});
+	button.text("Add");
+	button.on("click", function() { alert('hey');});
+	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
 }
+
 
 </script>
 	{% for result, inSchedule in classes.iteritems %}
@@ -59,9 +63,9 @@ function setAddButton(eventID, studentID)
 			<div class="col-sm-4">
 				<div id="button-{{result.meeting.id}}" class="row">
 				{% if inSchedule %}				
-				<script>setRemoveButton("'{{result.meeting.id}}'", "'{{student_id}}'");</script>
+				<script>setRemoveButton("{{result.meeting.id}}", "{{student_id}}")</script>
 				{% else %}
-				<script>setAddButton("'{{result.meeting.id}}'", "'{{student_id}}'");</script>
+				<script>setAddButton("{{result.meeting.id}}", "{{student_id}}")</script>
 				{% endif %}
 				</div>
 				<div class="row">
