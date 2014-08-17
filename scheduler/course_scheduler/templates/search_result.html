@@ -10,7 +10,7 @@ function Add(eventID, studentID)
 function AddSuccess(data, textState, jqXHR)
 {
 
-	$("#button-".concat(data.eventID)).html("<button type='button' class='btn btn-danger btn-xs' onclick='Remove('".concat(data.eventID).concat("','").concat(data.studentID).concat("')'>Remove</button>"));
+	$("#button-".concat(data.eventID)).html("<button type=&quot;button&quot; class=&quot;btn btn-danger btn-xs&quot; onclick=&quot;Remove(".concat(data.eventID).concat("&quot;,&quot;").concat(data.studentID).concat("&quot;)&quot;>Remove</button>"));
 
 }
 
@@ -21,7 +21,7 @@ function Remove(eventID, studentID)
 
 function RemoveSuccess(data, textState, jqXHR)
 {
-	$("#button-".concat(data.eventID)).html("<button type='button' class='btn btn-success btn-xs' onclick='Add('".concat(data.eventID).concat("','").concat(data.studentID).concat("')'>Add</button>"));
+	$("#button-".concat(data.eventID)).html("<button type=&quot;button&quot; class=&quot;btn btn-danger btn-xs&quot; onclick=&quot;Add(".concat(data.eventID).concat("&quot;,&quot;").concat(data.studentID).concat("&quot;)&quot;>Add</button>"));
 }
 
 
