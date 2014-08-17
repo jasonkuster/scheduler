@@ -156,10 +156,15 @@ def add(request):
 def new_search(request):
     status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/searchtest/')
     toSend = {}
-    criterion = ''
-    if request.method == 'GET':
+    criterion = ''   
+    
+    if request.method == 'GET':  
         patt = re.compile('(\w{4}( )*(\d{1,4}|(\d{1.4}w)))')
         criterion = request.GET['criterion']
+        originalCriterion = criterion;
+        criterion = criterion.strip()
+        
+        
         if patt.match(criterion):
             str = string.replace(criterion, ' ', '')
             arr = [None]*2
@@ -181,7 +186,7 @@ def new_search(request):
     else:
         return HttpResponseBadRequest('Search Failed')
     
-    response = render(request, 'search_result.html', {'classes' : toSend, 'searchid' : criterion, 'student_id' : id})
+    response = render(request, 'search_result.html', {'classes' : toSend, 'searchid' : originalCriterion, 'student_id' : id})
     #logging.debug('RETURNING')
     return response
 
