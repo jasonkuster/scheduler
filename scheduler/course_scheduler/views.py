@@ -11,6 +11,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.db.models import Q
 from django.core.exceptions import ValidationError
 import datetime
+import json
 import re
 import sys
 import random
@@ -375,7 +376,9 @@ def add_course(request):
         stu = Student.objects.get(case_id=caseId)
         enroll = Enrollment(student_id=stu.pk, event_id=eventId)
         enroll.save()
-        return HttpResponse('Success', content_type='text/plain')
+        responseData = {}
+        responseData['eventID'] = eventId
+        return HttpResponse(json.dump(responseData), content_type='application')
         #return HttpResponse('Success', content_type='text/plain')
     return HttpResponseBadRequest('Add Failed')
 
@@ -413,7 +416,9 @@ def remove_course(request):
         stu = Student.objects.get(case_id=caseId)
         enroll = Enrollment.objects.get(student_id=stu.pk, event_id=eventId)
         enroll.delete()
-        return HttpResponse('Success', content_type='text/plain')
+        responseData = {}
+        responseData['eventID'] = eventId
+        return HttpResponse(json.dump(responseData), content_type='application')
     return HttpResponseBadRequest('Remove Failed')
 
 #   The mycourses view function is another

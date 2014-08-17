@@ -9,7 +9,7 @@ function Add(eventID, studentID)
 
 function AddSuccess(data, textState, jqXHR)
 {
-
+	$('#button-' + data.eventID).html("hey");
 }
 
 function Remove(eventID, studentID)
@@ -19,7 +19,7 @@ function Remove(eventID, studentID)
 
 function RemoveSuccess(data, textState, jqXHR)
 {
-	
+	$('#button-' + data.eventID).html("hey");
 }
 
 
@@ -37,12 +37,14 @@ function RemoveSuccess(data, textState, jqXHR)
 			</div>
 
 			<div class="col-sm-4">
-				<div class="row">
+				<div id="button-{{result.meeting.id}}" class="row">
 				{% if inSchedule %}				
 				<button type="button" class="btn btn-danger btn-xs" onclick="Remove('{{result.meeting.id}}', '{{student_id}}')">Remove</button>
 				{% else %}
-				<button type="button" class="btn btn-secondary btn-xs" onclick="Add('{{result.meeting.id}}', '{{student_id}}')">Add</button>
+				<button type="button" class="btn btn-success btn-xs" onclick="Add('{{result.meeting.id}}', '{{student_id}}')">Add</button>
 				{% endif %}
+				</div>
+				<div class="row">
 				<button type="button" class="btn btn-info btn-xs">Info</button>
 				
 				</div>
