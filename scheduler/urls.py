@@ -23,5 +23,5 @@ urlpatterns = patterns('',
     url(r'^scheduler/searchtest$', 'course_scheduler.views.searchtest', name='searchtest'),
     url(r'^scheduler/new_search/$', 'course_scheduler.views.new_search', name='new_search'),
     url(r'^scheduler/return_test/$', 'course_scheduler.views.return_test', name='return_test'),
-    url(r'^scheduler/add_course$', 'course_scheduler.views.add_course', name='add_course'),
+    url(r'^scheduler/add_course/$', 'course_scheduler.views.add_course', name='add_course'),
 )
