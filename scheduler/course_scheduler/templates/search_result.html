@@ -44,26 +44,16 @@ function RemoveSuccess(data, textState, jqXHR)
 
 function setRemoveButton(eventID, stduentID)
 {
-	var button = button = $("<button>");
-	button.addClass("btn btn-danger btn-xs");
-	button.attr({
-		type: "button"
-	});
-	button.text("Remove");
-	button.on("click", function() { alert('hey');});
-	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
+	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
+	$("#button-".concat(eventIDWithoutQuotes)).html("<button class=quot;btn btn-danger btn-xs quot; onclick=quot;Remove(" +
+			eventID + ", " + studentID + ") quot; >Remove</button>");
 }
 
 function setAddButton(eventID, stduentID)
 {
-	var button = button = $("<button>");
-	button.addClass("btn btn-danger btn-xs");
-	button.attr({
-		type: "button"
-	});
-	button.text("Add");
-	button.on("click", function() { alert('hey');});
-	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
+	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
+	$("#button-".concat(eventIDWithoutQuotes)).html("<button class=quot;btn btn-danger btn-xs quot; onclick=quot;Add(" +
+			eventID + ", " + studentID + ") quot; >Add</button>");
 }
 
 
@@ -81,11 +71,11 @@ function setAddButton(eventID, stduentID)
 			</div>
 
 			<div class="col-sm-4">
-				<div class="row"></div>
+				<div class="row" id="button-{{result.meeting.id}}"></div>
 				{% if inSchedule %}				
-				<input id="button-{{result.meeting.id}}" type="button" class="btn btn-danger btn-xs" onclick="AddOrRemove('{{result.meeting.id}}', '{{student_id}}', this.value)" value="Remove"></input>
+				<script>setRemoveButton('{{result.meeting.id}}', '{{student_id}}')</script>
 				{% else %}
-				<input type="button" class="btn btn-success btn-xs" onclick="Add('{{result.meeting.id}}', '{{student_id}}', this.value)" value="Add"></input>
+				<script>setAddButton('{{result.meeting.id}}', '{{student_id}}')</script>
 				{% endif %}
 				</div>
 				<div class="row">
