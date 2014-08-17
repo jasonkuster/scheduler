@@ -6,6 +6,7 @@ from course_scheduler.strings import Strings
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.http import HttpResponseBadRequest
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.db.models import Q
 from django.core.exceptions import ValidationError
@@ -183,7 +184,7 @@ def new_search(request):
             else:
                 toSend[c] = False
     else:
-        return None
+        return HttpResponseBadRequest('Search Failed')
     
     response = render(request, 'search_result.html', {'classes' : toSend, 'searchid' : criterion, 'student_id' : id})
     #logging.debug('RETURNING')
@@ -382,7 +383,7 @@ def add_course(request):
         enroll.save()
         return HttpResponse('Success', content_type='text/plain');
         #return HttpResponse('Success', content_type='text/plain')
-    return HttpResponse('Fail', content_type='text/plain')
+    return HttpResponseBadRequest('Add Failed')
 
 #   The removecourse is a temporary view
 #   that is called when a user click
@@ -403,12 +404,23 @@ def add_course(request):
 def removecourse(request):
     if request.method == 'POST':
         eventId = request.POST['eventID']
-        caseId = request.POST['id']
+        caseId = request.POST['studentID']
         stu = Student.objects.get(case_id=caseId)
         enroll = Enrollment.objects.get(student_id=stu.pk, event_id=eventId)
         enroll.delete()
         return HttpResponseRedirect('/scheduler/')
     raise Http404
+
+@csrf_protect
+def remove_course(request):
+    if request.method == 'POST':
+        eventId = request.POST['studentID']
+        caseId = request.POST['id']
+        stu = Student.objects.get(case_id=caseId)
+        enroll = Enrollment.objects.get(student_id=stu.pk, event_id=eventId)
+        enroll.delete()
+        return HttpResponse('Success', content_type='text/plain');
+    return HttpResponseBadRequest('Search Failed'))
 
 #   The mycourses view function is another
 #   view function for the add.html page.
