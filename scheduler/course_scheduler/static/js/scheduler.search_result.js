@@ -44,7 +44,7 @@ function ToggleInfo(eventID)
 
 function ShowInfo(eventID)
 {
-	$("#info-".concat(eventID)).hide();
+	$("#info-".concat(eventID)).show();
 }
 
 function HideInfo(eventID)
