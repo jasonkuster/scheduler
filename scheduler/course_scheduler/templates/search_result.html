@@ -12,7 +12,7 @@ function AddSuccess(data, textState, jqXHR)
 
 }
 
-function Add(eventID, studentID)
+function Remove(eventID, studentID)
 {
 	$.post("/scheduler/remove_course/", { 'eventID' : eventID, 'studentID' : studentID }, RemoveSuccess);	
 }
