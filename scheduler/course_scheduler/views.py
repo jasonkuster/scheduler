@@ -378,6 +378,7 @@ def add_course(request):
         enroll.save()
         responseData = {}
         responseData['eventID'] = eventId
+        responseData['studentID'] = caseId
         return HttpResponse(json.dumps(responseData), content_type='application/json')
         #return HttpResponse('Success', content_type='text/plain')
     return HttpResponseBadRequest('Add Failed')
@@ -414,10 +415,11 @@ def remove_course(request):
         eventId = request.POST['eventID']
         caseId = request.POST['studentID']
         stu = Student.objects.get(case_id=caseId)
-        enroll = Enrollment.objects.get(student_id=stu.pk, event_id=eventId)
+        enroll = Enrollment.objects.get(student_id=stu.pk, event_id=eventeId)
         enroll.delete()
         responseData = {}
         responseData['eventID'] = eventId
+        responseData['studentID'] = caseId
         return HttpResponse(json.dumps(responseData), content_type='application/json')
     return HttpResponseBadRequest('Remove Failed')
 
