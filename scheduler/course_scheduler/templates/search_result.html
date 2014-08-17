@@ -25,6 +25,7 @@ function RemoveSuccess(data, textState, jqXHR)
 function setRemoveButton(eventID, studentID)
 {
 	var div = document.createElement('div');
+	div.className="row";
 	var but = document.createElement('button');
 	but.type = "button";
 	but.className = "btn btn-danger btn-xs"
@@ -41,6 +42,7 @@ function setAddButton(eventID, studentID)
 {
 	var div = document.createElement('div');
 	var but = document.createElement('button');
+	div.className="row";
 	but.type = "button";
 	but.className = "btn btn-danger btn-xs"
 	
