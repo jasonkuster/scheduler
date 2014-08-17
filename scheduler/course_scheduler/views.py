@@ -408,8 +408,8 @@ def removecourse(request):
 @csrf_protect
 def remove_course(request):
     if request.method == 'POST':
-        eventId = request.POST['studentID']
-        caseId = request.POST['id']
+        eventId = request.POST['eventID']
+        caseId = request.POST['studentID']
         stu = Student.objects.get(case_id=caseId)
         enroll = Enrollment.objects.get(student_id=stu.pk, event_id=eventId)
         enroll.delete()
