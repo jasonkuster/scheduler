@@ -24,33 +24,23 @@ function RemoveSuccess(data, textState, jqXHR)
 
 function setRemoveButton(eventID, studentID)
 {
-	var div = document.createElement('div');
-	div.className="row";
-	var but = document.createElement('button');
-	but.type = "button";
-	but.className = "btn btn-danger btn-xs"
-	
-	but.value = "Remove";
-	div.appendChild(but);
-	var oldDiv = document.getElementById("button-".concat(eventID.substring(1, eventID.length - 1)));
-	oldDiv.parentNode.replaceChild(div, oldDiv);
-	but.onclick = function() { Remove(eventID, studentID); };
+	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
+	var str1 = "<button class='btn btn-danger btn-xs' onclick='Remove(";
+	var str2 = eventID + ", " + studentID;
+	var str3 = ")' >Remove</button>");
+	var html = str1.concat(str2).concat(str3);
+	$("#button-".concat(eventIDWithoutQuotes)).html(html);
 }
 
 
 function setAddButton(eventID, studentID)
 {
-	var div = document.createElement('div');
-	var but = document.createElement('button');
-	div.className="row";
-	but.type = "button";
-	but.className = "btn btn-danger btn-xs"
-	
-	but.value = "Add";
-	div.appendChild(but);
-	var oldDiv = document.getElementById("button-".concat(eventID.substring(1, eventID.length - 1)));
-	oldDiv.parentNode.replaceChild(div, oldDiv);
-	but.onclick = function() { Add(eventID, studentID); };
+	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
+	var str1 = "<button class='btn btn-success btn-xs' onclick='Add(";
+	var str2 = eventID + ", " + studentID;
+	var str3 = ")' >Add</button>");
+	var html = str1.concat(str2).concat(str3);
+	$("#button-".concat(eventIDWithoutQuotes)).html(html);
 }
 
 </script>
