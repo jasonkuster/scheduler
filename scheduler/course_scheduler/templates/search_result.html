@@ -11,7 +11,7 @@ function AddSuccess(data, textState, jqXHR)
 {
 	var button = document.getElementById("button-".concat(new String(data.eventID)));
 	button.className = "btn btn-danger btn-xs";
-	button.innerHtml = "Remove";
+	button.value = "Remove";
 }
 
 function Remove(eventID, studentID)
@@ -39,7 +39,7 @@ function RemoveSuccess(data, textState, jqXHR)
 {
 	var button = document.getElementById("button-".concat(new String(data.eventID)));
 	button.className = "btn btn-success btn-xs";
-	button.innerHtml = "Add";
+	button.value = "Add";
 }
 
 function setRemoveButton(eventID, stduentID)
@@ -81,11 +81,13 @@ function setAddButton(eventID, stduentID)
 			</div>
 
 			<div class="col-sm-4">
+				<div class="row"></div>
 				{% if inSchedule %}				
-				<button id="button-{{result.meeting.id}}" type="button" class="btn btn-danger btn-xs" onclick="AddOrRemove('{{result.meeting.id}}', '{{student_id}}', this.innerHtml)">Remove</button>
+				<button id="button-{{result.meeting.id}}" type="button" class="btn btn-danger btn-xs" onclick="AddOrRemove('{{result.meeting.id}}', '{{student_id}}', this.innerHtml)" value="Remove"></button>
 				{% else %}
-				<button type="button" class="btn btn-success btn-xs" onclick="Add('{{result.meeting.id}}', '{{student_id}}, this.innerHtml')">Add</button>
+				<button type="button" class="btn btn-success btn-xs" onclick="Add('{{result.meeting.id}}', '{{student_id}}, this.innerHtml')" value="Add"></button>
 				{% endif %}
+				</div>
 				<div class="row">
 				<button type="button" class="btn btn-info btn-xs">Info</button>
 				
