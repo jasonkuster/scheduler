@@ -71,7 +71,7 @@ function HideInfo(eventID)
 				</div>
 			</div>
 			</div>
-		</div>
+		
 		<div id="info-{{result.meeting.id}}" class="panel panel-info no-vertical-padding no-buffer" style="display: none">
 		<div class="panel-heading">{{result.meeting.meeting_class.classname}}<button class="btn btn-default btn-xs pull-right" onclick="HideInfo({{result.meeting.id}})"><span class="glyphicon glyphicon-remove"></span></button></div>
 		<table class="table table-codensed">
@@ -82,6 +82,7 @@ function HideInfo(eventID)
 		{{result.meeting.meeting_class.description}}
 		</div>
 		</div>	
+		</div>
 	{% endfor %}
 {% else %}
 	<div><h4>NO RESULTS FOUND</h4></div>
