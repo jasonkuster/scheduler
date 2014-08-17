@@ -149,12 +149,6 @@ def add(request):
         response.__setitem__('Set-Cookie', cookie)
     return response
 
-def return_test(request):
-    if request.method == 'GET':
-        toSend = {}
-        return render(request, 'search_result.html', {'classes' : toSend});
-    return None;
-
 #TODO smarter search
 #TODO instructor search
 @ensure_csrf_cookie
@@ -381,7 +375,7 @@ def add_course(request):
         stu = Student.objects.get(case_id=caseId)
         enroll = Enrollment(student_id=stu.pk, event_id=eventId)
         enroll.save()
-        return HttpResponse('Success', content_type='text/plain');
+        return HttpResponse('Success', content_type='text/plain')
         #return HttpResponse('Success', content_type='text/plain')
     return HttpResponseBadRequest('Add Failed')
 
@@ -419,8 +413,8 @@ def remove_course(request):
         stu = Student.objects.get(case_id=caseId)
         enroll = Enrollment.objects.get(student_id=stu.pk, event_id=eventId)
         enroll.delete()
-        return HttpResponse('Success', content_type='text/plain');
-    return HttpResponseBadRequest('Search Failed'))
+        return HttpResponse('Success', content_type='text/plain')
+    return HttpResponseBadRequest('Remove Failed')
 
 #   The mycourses view function is another
 #   view function for the add.html page.
