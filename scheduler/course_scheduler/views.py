@@ -374,6 +374,7 @@ def addcourse(request):
 
 @ensure_csrf_cookie
 def add_course(request):
+    raise Http404
     if request.method == 'POST':
         eventId = request.POST['eventID']
         caseId = request.POST['studentID']
