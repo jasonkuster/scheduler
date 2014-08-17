@@ -24,14 +24,17 @@ function RemoveSuccess(data, textState, jqXHR)
 
 function setRemoveButton(eventID, studentID)
 {
-	$("#button-".concat(eventID)).html("<button class='btn btn-danger btn-xs' onclick='Remove(" +
+	
+	var eventIDWithoutQuotes = eventID.substring(1, eventID.length);
+	$("#button-".concat(eventIDWithoutQuotes)).html("<button class='btn btn-danger btn-xs' onclick='Remove(" +
 			eventID + ", " + studentID + ")' type='button' >Remove</button>");
 }
 
 
 function setAddButton(eventID, studentID)
 {
-	$("#button-".concat(eventID)).html("<button  class='btn btn-success btn-xs' onclick='Add(" +
+	var eventIDWithoutQuotes = eventID.substring(1, eventID.length);
+	$("#button-".concat(eventIDWithoutQuotes)).html("<button  class='btn btn-success btn-xs' onclick='Add(" +
 			eventID + ", " + studentID + ")' type='button'>Add</button>");
 }
 
