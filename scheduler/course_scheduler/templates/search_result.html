@@ -26,10 +26,10 @@ function setRemoveButton(eventID, studentID)
 {
 	try {throw ''} catch (e) {}
 	var str1 = "<button class='btn btn-danger btn-xs' type='button' onclick='Remove(";
-	var str2 = new String(eventID) + ", " + new String(studentID);
+	var str2 = eventID.val() + ", " + studentID.val();
 	var str3 = ")' >Remove</button>";
 	var html = str1.concat(str2).concat(str3);
-	$("#button-".concat(new String(eventID))).html(html);
+	$("#button-".concat(eventID.val())).html(html);
 }
 
 
