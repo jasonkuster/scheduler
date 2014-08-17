@@ -24,25 +24,31 @@ function RemoveSuccess(data, textState, jqXHR)
 
 function setRemoveButton(eventID, studentID)
 {
+	var div = document.createElement('div');
 	var but = document.createElement('button');
 	but.type = "button";
 	but.className = "btn btn-danger btn-xs"
-	but.onclick = function() { Remove(eventID, studentID); };
+	
 	but.value = "Remove";
-	var oldBut = document.getElementById("button-".concat(eventID.substring(1, eventID.length - 1)));
-	oldBut.parentNode.replaceChild(but, oldBut);
+	div.appendChild(but);
+	var oldDiv = document.getElementById("button-".concat(eventID.substring(1, eventID.length - 1)));
+	oldDiv.parentNode.replaceChild(div, oldDiv);
+	but.onclick = function() { Remove(eventID, studentID); };
 }
 
 
 function setAddButton(eventID, studentID)
 {
+	var div = document.createElement('div');
 	var but = document.createElement('button');
 	but.type = "button";
 	but.className = "btn btn-danger btn-xs"
-	but.onclick = function() { Add(eventID, studentID); };
+	
 	but.value = "Add";
-	var oldBut = document.getElementById("button-".concat(eventID.substring(1, eventID.length - 1)));
-	oldBut.parentNode.replaceChild(but, oldBut);
+	div.appendChild(but);
+	var oldDiv = document.getElementById("button-".concat(eventID.substring(1, eventID.length - 1)));
+	oldDiv.parentNode.replaceChild(div, oldDiv);
+	but.onclick = function() { Add(eventID, studentID); };
 }
 
 </script>
