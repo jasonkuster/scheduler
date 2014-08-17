@@ -44,7 +44,6 @@ function RemoveSuccess(data, textState, jqXHR)
 
 function setRemoveButton(eventID, studentID)
 {
-	alert('script')
 	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
 	$("#button-".concat(eventIDWithoutQuotes)).html("<button class=quot;btn btn-danger btn-xs quot; onclick=quot;Remove(" +
 			eventID + ", " + studentID + ") quot; >Remove</button>");
@@ -52,7 +51,6 @@ function setRemoveButton(eventID, studentID)
 
 function setAddButton(eventID, studentID)
 {
-	alert('add');
 	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
 	$("#button-".concat(eventIDWithoutQuotes)).html("<button class=quot;btn btn-danger btn-xs quot; onclick=quot;Add(" +
 			eventID + ", " + studentID + ") quot; >Add</button>");
@@ -73,11 +71,11 @@ function setAddButton(eventID, studentID)
 			</div>
 
 			<div class="col-sm-4">
-				<div class="row" id="button-{{result.meeting.id}}"></div>
+				<div class="row" id="button-{{result.meeting.id}}">
 				{% if inSchedule %}				
-				<script>alert('hey1'); setRemoveButton('{{result.meeting.id}}', '{{student_id}}');</script>
+				<script>setRemoveButton("'{{result.meeting.id}}'", "'{{student_id}}'");</script>
 				{% else %}
-				<script>alert('hey2'); setAddButton('{{result.meeting.id}}', '{{student_id}}');</script>
+				<script>setAddButton("'{{result.meeting.id}}'", "'{{student_id}}'");</script>
 				{% endif %}
 				</div>
 				<div class="row">
