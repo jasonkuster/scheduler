@@ -51,9 +51,9 @@ function setAddButton(eventID, studentID)
 			<div class="col-sm-4">
 				<div id="button-{{result.meeting.id}}" class="row">
 				{% if inSchedule %}				
-				setRemoveButton('{{result.meeting.id}}', '{{student_id}}');
+				<script>setRemoveButton('{{result.meeting.id}}', '{{student_id}}');</script>
 				{% else %}
-				setAddButton('{{result.meeting.id}}', '{{student_id}}');
+				<script>setAddButton('{{result.meeting.id}}', '{{student_id}}');</script>
 				{% endif %}
 				</div>
 				<div class="row">
