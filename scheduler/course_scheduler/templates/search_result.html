@@ -15,7 +15,7 @@ function AddSuccess(data, textState, jqXHR)
 		type: "button"
 	});
 	button.text("Remove");
-	button.on("click", function() {Remove(data.eventID, data.studentID);});
+	button.on("click", Remove(data.eventID, data.studentID));
 	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
 }
 
@@ -29,7 +29,7 @@ function RemoveSuccess(data, textState, jqXHR)
 	var button = document.createElement("button");
 	button.type="button";
 	button.className = "btn btn-success btn-xs";
-	button.on("click", function() {Add(data.eventID, data.studentID);});
+	button.on("click", Add(data.eventID, data.studentID));
 	button.innerHTML = "Add";
 	
 	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
