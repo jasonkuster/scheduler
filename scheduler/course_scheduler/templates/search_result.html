@@ -9,7 +9,9 @@ function Add(eventID, studentID)
 
 function AddSuccess(data, textState, jqXHR)
 {
-	setAddButton(data.eventID, data.studentID);
+	var button = document.getElementById("button-".concat(new String(data.eventID)));
+	button.className = "btn btn-danger btn-xs";
+	button.innerHtml = "Remove";
 }
 
 function Remove(eventID, studentID)
@@ -17,14 +19,31 @@ function Remove(eventID, studentID)
 	$.post("/scheduler/remove_course/", { 'eventID' : eventID, 'studentID' : studentID }, RemoveSuccess);	
 }
 
+function AddOrRemove(eventID, studentID, AddOrRemove)
+{
+	if (AddOrRemove === "Remove")
+	{
+		Add(eventID, studentID);
+	}
+	else if (AddOrRemove === "Add")
+	{
+		Remove(eventID, studentID);
+	}
+	else
+	{
+		alert("uh oh");
+	}
+}
+
 function RemoveSuccess(data, textState, jqXHR)
 {
-	setRemoveButton(data.eventID, data.studentID);
+	var button = document.getElementById("button-".concat(new String(data.eventID)));
+	button.className = "btn btn-success btn-xs";
+	button.innerHtml = "Add";
 }
 
 function setRemoveButton(eventID, stduentID)
 {
-	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
 	var button = button = $("<button>");
 	button.addClass("btn btn-danger btn-xs");
 	button.attr({
@@ -32,12 +51,11 @@ function setRemoveButton(eventID, stduentID)
 	});
 	button.text("Remove");
 	button.on("click", function() { alert('hey');});
-	$("#button-".concat(eventIDWithoutQuotes)).html($("<div>").append(button).clone().html());
+	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
 }
 
 function setAddButton(eventID, stduentID)
 {
-	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
 	var button = button = $("<button>");
 	button.addClass("btn btn-danger btn-xs");
 	button.attr({
@@ -45,7 +63,7 @@ function setAddButton(eventID, stduentID)
 	});
 	button.text("Add");
 	button.on("click", function() { alert('hey');});
-	$("#button-".concat(eventIDWithoutQuotes)).html($("<div>").append(button).clone().html());
+	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
 }
 
 
@@ -63,13 +81,11 @@ function setAddButton(eventID, stduentID)
 			</div>
 
 			<div class="col-sm-4">
-				<div id="button-{{result.meeting.id}}" class="row">
 				{% if inSchedule %}				
-				<script>setRemoveButton('{{result.meeting.id}}', '{{student_id}}')</script>
+				<button id="button-{{result.meeting.id}}" type="button" class="btn btn-danger btn-xs" onclick="AddOrRemove('{{result.meeting.id}}', '{{student_id}}', this.innerHtml)">Remove</button>
 				{% else %}
-				<script>setAddButton('{{result.meeting.id}}', '{{student_id}}')</script>
+				<button type="button" class="btn btn-success btn-xs" onclick="Add('{{result.meeting.id}}', '{{student_id}}, this.innerHtml')">Add</button>
 				{% endif %}
-				</div>
 				<div class="row">
 				<button type="button" class="btn btn-info btn-xs">Info</button>
 				
