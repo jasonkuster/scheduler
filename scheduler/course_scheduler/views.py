@@ -382,7 +382,7 @@ def add_course(request):
         enroll.save()
         return HttpResponse('Success', content_type='text/plain');
         #return HttpResponse('Success', content_type='text/plain')
-    raise Http404
+    return HttpResponse('Fail', content_type='text/plain')
 
 #   The removecourse is a temporary view
 #   that is called when a user click
