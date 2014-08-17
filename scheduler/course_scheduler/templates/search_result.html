@@ -39,7 +39,7 @@ function AddSuccess(data, textState, jqXHR)
 					<input type="submit" class="btn btn-danger btn-xs" value="Add" />
 					</form>
 				</div>-->
-				<button type="button" class="btn btn-danger btn-xs" onclick="Add({{result.meeting.id}}, {{student_id}})">Add</button>
+				<button type="button" class="btn btn-danger btn-xs" onclick="Add('{{result.meeting.id}}', '{{student_id}}')">Add</button>
 				{% endif %}
 				<button type="button" class="btn btn-info btn-xs">Info</button>
 				
