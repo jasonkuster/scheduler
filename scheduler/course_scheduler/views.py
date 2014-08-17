@@ -378,7 +378,7 @@ def add_course(request):
         enroll.save()
         responseData = {}
         responseData['eventID'] = eventId
-        return HttpResponse(json.dump(responseData), content_type='application')
+        return HttpResponse(json.dumps(responseData), content_type='application')
         #return HttpResponse('Success', content_type='text/plain')
     return HttpResponseBadRequest('Add Failed')
 
@@ -418,7 +418,7 @@ def remove_course(request):
         enroll.delete()
         responseData = {}
         responseData['eventID'] = eventId
-        return HttpResponse(json.dump(responseData), content_type='application')
+        return HttpResponse(json.dumps(responseData), content_type='application')
     return HttpResponseBadRequest('Remove Failed')
 
 #   The mycourses view function is another
