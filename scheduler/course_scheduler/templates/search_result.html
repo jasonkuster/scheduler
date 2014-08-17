@@ -39,6 +39,11 @@ function ShowInfo(eventID)
 	$("#info-".concat(eventID)).show();
 }
 
+function HideInfo(eventID)
+{
+	$("#info-".concat(eventID)).hide();
+}
+
 </script>
 	{% for result, inSchedule in classes.iteritems %}
 		<div class="well well-sm result-well panel panel-default">
@@ -68,7 +73,7 @@ function ShowInfo(eventID)
 			</div>
 		</div>
 		<div id="info-{{result.meeting.id}}" class="panel panel-info no-vertical-padding no-buffer" style="display: none">
-		<div class="panel-heading">{{result.meeting.meeting_class.classname}}<button class="btn btn-mini pull-right"><i class="icon-remove"></i></button></div>
+		<div class="panel-heading">{{result.meeting.meeting_class.classname}}<button class="btn btn-default btn-xs pull-right" onlick="HideInfo({{result.meeting.id}})"><span class="glyphicon glyphicon-remove"></span></button></div>
 		<table class="table table-codensed">
 		<tr><td style="padding-left: 15px">Location: {{result.meeting.meeting_location}}</td></tr>
 		<tr><td style="padding-left: 15px">Staff: {{result.instructor.name}}</td></tr>
