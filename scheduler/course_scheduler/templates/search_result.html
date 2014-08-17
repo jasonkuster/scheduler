@@ -4,13 +4,7 @@
 <script>
 function Add(eventID, studentID)
 {
-	var button = button = $("<button>");
-	button.addClass("btn btn-danger btn-xs");
-	button.attr({
-		type: "button"
-	});
-	button.text("Add");
-	button.on("click", function() {Add(data.eventID, data.studentID);});
+	$.post("/scheduler/add_course/", { 'eventID' : eventID, 'studentID' : studentID }, AddSuccess);	
 }
 
 function AddSuccess(data, textState, jqXHR)
