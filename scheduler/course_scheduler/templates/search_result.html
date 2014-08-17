@@ -67,14 +67,14 @@ function ShowInfo(eventID)
 			</div>
 			</div>
 		</div>
-		<div id="info-{{result.meeting.id}}" class="panel panel-info" style="display: none">
+		<div id="info-{{result.meeting.id}}" class="panel panel-info no-vertical-padding" style="display: none">
 		<div class="panel-heading">{{result.meeting.meeting_class.classname}}</div>
+		<div class="panel-body">
 		<table class="table table-codensed table-bordered">
 		<tr><td>Location: {{result.meeting.meeting_location}}</td></tr>
 		<tr><td>Staff: {{result.instructor.name}}</td></tr>
+		<tr><td>{{result.meeting.meeting_class.description}}</td></tr>
 		</table>
-		<div class="panel-body">
-		{{result.meeting.meeting_class.description}}
 		</div>
 		</div>	
 	{% endfor %}
