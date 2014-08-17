@@ -24,18 +24,25 @@ function RemoveSuccess(data, textState, jqXHR)
 
 function setRemoveButton(eventID, studentID)
 {
-	
-	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
-	$("#button-".concat(eventIDWithoutQuotes)).html("<button class='btn btn-danger btn-xs' onclick='Remove(" +
-			eventID + ", " + studentID + ")' >Remove</button>");
+	var but = document.createElement('button');
+	but.type = "button";
+	but.className = "btn btn-danger btn-xs"
+	but.onclick = function() { Remove(eventID, studentID); };
+	but.value = "Remove";
+	var oldBut = document.getElementById("button-".concat(eventID.substring(1, eventID.length - 1)));
+	oldBut.parentNode.replaceChild(but, oldBut);
 }
 
 
 function setAddButton(eventID, studentID)
 {
-	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
-	$("#button-".concat(eventIDWithoutQuotes)).html("<button  class='btn btn-success btn-xs' onclick='Add(" +
-			eventID + ", " + studentID + ")'>Add</button>");
+	var but = document.createElement('button');
+	but.type = "button";
+	but.className = "btn btn-danger btn-xs"
+	but.onclick = function() { Add(eventID, studentID); };
+	but.value = "Add";
+	var oldBut = document.getElementById("button-".concat(eventID.substring(1, eventID.length - 1)));
+	oldBut.parentNode.replaceChild(but, oldBut);
 }
 
 </script>
