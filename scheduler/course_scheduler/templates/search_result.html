@@ -12,7 +12,7 @@ function AddSuccess(data, textState, jqXHR)
 	var button = document.createElement("button");
 	button.type="button";
 	button.className = "btn btn-danger btn-xs";
-	button.onclick = function() {Remove(data.eventID, data.studentID)};
+	button.onclick = function() {Remove(data.eventID, data.studentID);};
 	button.innerHTML = "Remove";
 	
 	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
@@ -28,7 +28,7 @@ function RemoveSuccess(data, textState, jqXHR)
 	var button = document.createElement("button");
 	button.type="button";
 	button.className = "btn btn-success btn-xs";
-	button.onclick = function() {Add(data.eventID, data.studentID)};
+	button.onclick = function() {Add(data.eventID, data.studentID);};
 	button.innerHTML = "Add";
 	
 	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
