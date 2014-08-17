@@ -6,7 +6,7 @@ from course_scheduler.strings import Strings
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.db.models import Q
 from django.core.exceptions import ValidationError
 import datetime
@@ -372,7 +372,7 @@ def addcourse(request):
         return HttpResponseRedirect('/scheduler/')
     raise Http404
 
-@ensure_csrf_cookie
+@csrf_protect
 def add_course(request):
     raise Http404
     if request.method == 'POST':

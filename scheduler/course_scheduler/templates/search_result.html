@@ -7,7 +7,6 @@
 
 function Add(eventID, studentID)
 {
-	alert("adding");
 	$.post("/scheduler/add_course/", { 'eventID' : eventID, 'studentID' : studentID }, AddSuccess);	
 }
 
@@ -16,19 +15,7 @@ function AddSuccess(data, textState, jqXHR)
 	alert("hey");
 }
 
-function crsfSafeMethod(method) {
-	return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
 
-
-var csrftoken = $.cookie('csrftoken');
-$.ajaxSetup({
-	beforeSend: function(xhr, settings) {
-		if (!crsfSafeMethod(settings.type) && !this.crossDomain) {
-			xhr.setRequestHeader("X-CSRFToken", csrftoken);
-		}
-	}
-});
 </script>
 	{% for result, inSchedule in classes.iteritems %}
 		<div class="well well-sm result-well panel panel-default">
