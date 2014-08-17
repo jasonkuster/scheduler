@@ -27,7 +27,7 @@ function setRemoveButton(eventID, studentID)
 	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
 	var str1 = "<button class='btn btn-danger btn-xs' onclick='Remove(";
 	var str2 = eventID + ", " + studentID;
-	var str3 = ")' >Remove</button>");
+	var str3 = ")' >Remove</button>";
 	var html = str1.concat(str2).concat(str3);
 	$("#button-".concat(eventIDWithoutQuotes)).html(html);
 }
@@ -38,7 +38,7 @@ function setAddButton(eventID, studentID)
 	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
 	var str1 = "<button class='btn btn-success btn-xs' onclick='Add(";
 	var str2 = eventID + ", " + studentID;
-	var str3 = ")' >Add</button>");
+	var str3 = ")' >Add</button>";
 	var html = str1.concat(str2).concat(str3);
 	$("#button-".concat(eventIDWithoutQuotes)).html(html);
 }
