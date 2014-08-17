@@ -37,8 +37,9 @@ function setAddButton(eventID, studentID)
 
 </script>
 	{% for result, inSchedule in classes.iteritems %}
-		<div class="well well-sm result-well panel panel-default">
-			<div class="panel-body no-vertical-padding">
+	<div class="panel panel-default">
+	<div class="panel-body no-vertical-padding">
+			<div class="panel-body ">
 			<div class="col-sm-8">
 				<div class="row">
 				{{result.meeting.meeting_class.dept}} {{result.meeting.meeting_class.class_number}}
@@ -62,6 +63,8 @@ function setAddButton(eventID, studentID)
 				</div>
 			</div>
 			</div>
+		</div>
+		
 		</div>
 		
 	{% endfor %}
