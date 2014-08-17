@@ -9,9 +9,7 @@ function Add(eventID, studentID)
 
 function AddSuccess(data, textState, jqXHR)
 {
-	var button = document.getElementById("button-".concat(new String(data.eventID)));
-	button.className = "btn btn-danger btn-xs";
-	button.value = "Remove";
+	setRemoveButton(data.eventID, data.studentID);
 }
 
 function Remove(eventID, studentID)
@@ -21,23 +19,20 @@ function Remove(eventID, studentID)
 
 function RemoveSuccess(data, textState, jqXHR)
 {
-	var button = document.getElementById("button-".concat(new String(data.eventID)));
-	button.className = "btn btn-success btn-xs";
-	button.value = "Add";
+	setAddButton(data.eventID, data.studentID);
 }
 
 function setRemoveButton(eventID, studentID)
 {
 	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
-	$("#button-".concat(eventID)).html("<button class='btn btn-success btn-xs' onclick='alert(&quot; hey &quot;)'>Add</button>");
-	//$("#button-".concat(eventID)).html("<button class= quot;btn btn-danger btn-xs quot; onclick= quot;Remove( quot;" +
+	$("#button-".concat(eventID)).html("<button class='btn btn-danger btn-xs' onclick='Remove(&quot;"+ eventID +"&quot;,&quot;"+ studentID+"&quot;)'>Remove</button>");	//$("#button-".concat(eventID)).html("<button class= quot;btn btn-danger btn-xs quot; onclick= quot;Remove( quot;" +
 	//		eventID + "quot;, quot;" + studentID + "quot;) quot; >Remove</button>");
 }
 
 function setAddButton(eventID, studentID)
 {
 	var eventIDWithoutQuotes = eventID.substring(1, eventID.length - 1);
-	$("#button-".concat(eventID)).html("<button class='btn btn-danger btn-xs' onclick='alert(&quot; hey &quot;)'>Add</button>");
+	$("#button-".concat(eventID)).html("<button class='btn btn-success btn-xs' onclick='Add(&quot;"+ eventID +"&quot;,&quot;"+ studentID+"&quot;)'>Add</button>");
 }
 
 
