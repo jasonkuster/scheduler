@@ -9,14 +9,7 @@ function Add(eventID, studentID)
 
 function AddSuccess(data, textState, jqXHR)
 {
-	var button = button = $("<button>");
-	button.addClass("btn btn-danger btn-xs");
-	button.attr({
-		type: "button"
-	});
-	button.text("Remove");
-	button.on("click", function() {Remove(data.eventID, data.studentID);});
-	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
+	setRemoveButton(eventID, studentID);
 }
 
 function Remove(eventID, studentID)
@@ -26,16 +19,21 @@ function Remove(eventID, studentID)
 
 function RemoveSuccess(data, textState, jqXHR)
 {
-	var button = button = $("<button>");
-	button.addClass("btn btn-danger btn-xs");
-	button.attr({
-		type: "button"
-	});
-	button.text("Remove");
-	button.on("click", function() {Add(data.eventID, data.studentID);});
-	$("#button-".concat(data.eventID)).html($("<div>").append(button).clone().html());
+	setAddButton(eventID, studentID);
 }
 
+function setRemoveButton(eventID, studentID)
+{
+	$("#button-".concat(eventID)).html("<button type='button' class='btn btn-danger btn-xs' onclick='Remove('" +
+			eventID + "', '" + studentID + "')'>Remove</button>");
+}
+
+
+function setAddButton(eventID, studentID)
+{
+	$("#button-".concat(eventID)).html("<button type='button' class='btn btn-success btn-xs' onclick='Add('" +
+			eventID + "', '" + studentID + "')'>Add</button>");
+}
 
 </script>
 	{% for result, inSchedule in classes.iteritems %}
@@ -53,9 +51,9 @@ function RemoveSuccess(data, textState, jqXHR)
 			<div class="col-sm-4">
 				<div id="button-{{result.meeting.id}}" class="row">
 				{% if inSchedule %}				
-				<button type="button" class="btn btn-danger btn-xs" onclick="Remove('{{result.meeting.id}}', '{{student_id}}')">Remove</button>
+				setRemoveButton('{{result.meeting.id}}', '{{student_id}}');
 				{% else %}
-				<button type="button" class="btn btn-success btn-xs" onclick="Add('{{result.meeting.id}}', '{{student_id}}')">Add</button>
+				setAddButton('{{result.meeting.id}}', '{{student_id}}');
 				{% endif %}
 				</div>
 				<div class="row">
