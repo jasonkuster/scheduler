@@ -6,6 +6,7 @@ from course_scheduler.strings import Strings
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.db.models import Q
 from django.core.exceptions import ValidationError
 import datetime
@@ -155,6 +156,7 @@ def return_test(request):
 
 #TODO smarter search
 #TODO instructor search
+@ensure_csrf_cookie
 def new_search(request):
     status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/searchtest/')
     toSend = {}
@@ -370,6 +372,7 @@ def addcourse(request):
         return HttpResponseRedirect('/scheduler/')
     raise Http404
 
+@ensure_csrf_cookie
 def add_course(request):
     if request.method == 'POST':
         eventId = request.POST['eventID']
