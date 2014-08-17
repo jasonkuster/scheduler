@@ -39,6 +39,7 @@ function setAddButton(eventID, studentID)
 	{% for result, inSchedule in classes.iteritems %}
 	<div class="panel panel-default">
 	<div class="panel-body no-vertical-padding">
+		<div class="well well-sm result-well">
 			<div class="panel-body ">
 			<div class="col-sm-8">
 				<div class="row">
@@ -59,7 +60,7 @@ function setAddButton(eventID, studentID)
 				</div>
 				<div class="row">
 				<button type="button" class="btn btn-info btn-xs">Info</button>
-				
+				</div>
 				</div>
 			</div>
 			</div>
