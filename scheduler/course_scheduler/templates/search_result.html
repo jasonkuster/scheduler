@@ -9,7 +9,7 @@ function Add(eventID, studentID)
 
 function AddSuccess(data, textState, jqXHR)
 {
-	$('#button-' + data.eventID).html("hey");
+	$("#button-".concat(data.eventID).html('hey');
 }
 
 function Remove(eventID, studentID)
@@ -19,7 +19,7 @@ function Remove(eventID, studentID)
 
 function RemoveSuccess(data, textState, jqXHR)
 {
-	$('#button-' + data.eventID).html("hey");
+	$("#button-".concat(data.eventID).html('hey');
 }
 
 
