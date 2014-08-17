@@ -34,13 +34,15 @@ function setAddButton(eventID, studentID)
 	$("#button-".concat(eventID)).html("<button class='btn btn-success btn-xs' onclick='Add(&quot;"+ eventID +"&quot;,&quot;"+ studentID+"&quot;)'>Add</button>");
 }
 
+function ShowInfo(eventID)
+{
+	$("#info-".concat(eventID)).show();
+}
 
 </script>
 	{% for result, inSchedule in classes.iteritems %}
-	<div class="panel panel-default">
-	<div class="panel-body no-vertical-padding">
-		<div class="well well-sm result-well">
-			<div class="panel-body ">
+		<div class="well well-sm result-well panel panel-default">
+			<div class="panel-body no-vertical-padding">
 			<div class="col-sm-8">
 				<div class="row">
 				{{result.meeting.meeting_class.dept}} {{result.meeting.meeting_class.class_number}}
@@ -59,15 +61,22 @@ function setAddButton(eventID, studentID)
 				{% endif %}
 				</div>
 				<div class="row">
-				<button type="button" class="btn btn-info btn-xs">Info</button>
-				</div>
+				<button type="button" class="btn btn-info btn-xs" onclick="ShowInfo({{result.meeting.id}})">Info</button>
+				
 				</div>
 			</div>
 			</div>
 		</div>
-		
+		<div id="info-{{result.meeting.id}}" class="panel panel-info" style="display: none; visibility: hidden">
+		<div class="panel-heading">{{result.meeting_class.classname</div>
+		<table class="table">
+		<tr><td colspan="2">{{instruct.meeting.meeting_class.term}}: {{instruct.meeting.recur_type}} {{instruct.meeting.start_time}}</td></tr>
+		<tr><td>{{result.meeting.meeting_location}}</td><td>{{result.instructor.name}}</td></tr>
+		</table>
+		<div class="panel-body">
+		{{result.meeting.meeting_class.description}}
 		</div>
-		
+		</div>	
 	{% endfor %}
 {% else %}
 	<div><h4>NO RESULTS FOUND</h4></div>
