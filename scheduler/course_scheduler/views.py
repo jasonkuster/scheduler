@@ -415,7 +415,7 @@ def remove_course(request):
         eventId = request.POST['eventID']
         caseId = request.POST['studentID']
         stu = Student.objects.get(case_id=caseId)
-        enroll = Enrollment.objects.get(student_id=stu.pk, event_id=eventeId)
+        enroll = Enrollment.objects.get(student_id=stu.pk, event_id=eventId)
         enroll.delete()
         responseData = {}
         responseData['eventID'] = eventId
