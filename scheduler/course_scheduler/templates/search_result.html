@@ -9,6 +9,7 @@ function Add(eventID, studentID)
 
 function AddSuccess(data, textState, jqXHR)
 {
+	try {throw ''} catch(e){}
 	$("#button-".concat(data.eventID)).html('hey');
 }
 
@@ -19,6 +20,7 @@ function Remove(eventID, studentID)
 
 function RemoveSuccess(data, textState, jqXHR)
 {
+	try {throw ''} catch(e){}
 	$("#button-".concat(data.eventID)).html('hey');
 }
 
