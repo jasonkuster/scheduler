@@ -7,6 +7,7 @@
 
 function Add(eventID, studentID)
 {
+	alert("adding");
 	$.post("/scheduler/add_course/", { 'eventID' : eventID, 'studentID' : studentID }, AddSuccess);	
 }
 
