@@ -10,8 +10,12 @@ function searchSuccess(data, textState, jqXHR)
 function search()
 {	
 	if (new String($("#course_search").val()).length > 2)
-		{
-			$("#search_result").html('<div class="searching-panel">Searching . . .</div>');
-			$.get("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess, 'html');
-		}
+	{
+		$("#search_result").html('<div class="searching-panel">Searching . . .</div>');
+		$.get("/scheduler/search/", { 'criterion' : $("#course_search").val() }, searchSuccess, 'html');
+	}
+	else
+	{
+		$("#search_result").html('<div></div>');
+	}
 }
