@@ -151,7 +151,6 @@ def add(request):
     return response
 
 #TODO smarter search
-#TODO instructor search
 @ensure_csrf_cookie
 def new_search(request):
     status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/searchtest/')
@@ -170,7 +169,6 @@ def new_search(request):
             arr = [None]*2
             arr[0] = str[0:3]
             arr[1] = str[4:]
-            #arr = criterion.split(' ')
             classes = Instructs.objects.filter(meeting__meeting_class__dept__icontains=arr[0], meeting__meeting_class__class_number__istartswith=arr[1])
         else:
             classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion)
@@ -187,7 +185,6 @@ def new_search(request):
         return HttpResponseBadRequest('Search Failed')
     
     response = render(request, 'search_result.html', {'classes' : toSend, 'searchid' : originalCriterion, 'student_id' : id})
-    #logging.debug('RETURNING')
     return response
 
 #   The info view is called whenever
