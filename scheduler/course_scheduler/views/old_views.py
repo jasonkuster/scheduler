@@ -150,43 +150,6 @@ def add(request):
         response.__setitem__('Set-Cookie', cookie)
     return response
 
-#TODO smarter search
-@ensure_csrf_cookie
-def new_search(request):
-    status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/searchtest/')
-    toSend = {}
-    criterion = ''   
-    
-    if request.method == 'GET':  
-        patt = re.compile('(\w{4}( )*(\d{1,4}|(\d{1.4}w)))')
-        criterion = request.GET['criterion']
-        originalCriterion = criterion;
-        criterion = criterion.strip()
-        
-        
-        if patt.match(criterion):
-            str = string.replace(criterion, ' ', '')
-            arr = [None]*2
-            arr[0] = str[0:3]
-            arr[1] = str[4:]
-            classes = Instructs.objects.filter(meeting__meeting_class__dept__icontains=arr[0], meeting__meeting_class__class_number__istartswith=arr[1])
-        else:
-            classes = Instructs.objects.filter(Q(meeting__meeting_class__classname__icontains=criterion)
-                                            | Q(meeting__meeting_class__dept__icontains=criterion)
-                                            | Q(meeting__meeting_class__class_number__icontains=criterion)
-                                            | Q(instructor__name__icontains=criterion))
-
-        for c in classes:
-            if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
-                toSend[c] = True
-            else:
-                toSend[c] = False
-    else:
-        return HttpResponseBadRequest('Search Failed')
-    
-    response = render(request, 'search_result.html', {'classes' : toSend, 'searchid' : originalCriterion, 'student_id' : id})
-    return response
-
 #   The info view is called whenever
 #   the user clicks on a meeting-time's
 #   name. The function is passed a
