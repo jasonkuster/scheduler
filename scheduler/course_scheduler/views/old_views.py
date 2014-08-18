@@ -333,21 +333,6 @@ def addcourse(request):
         return HttpResponseRedirect('/scheduler/')
     raise Http404
 
-@csrf_protect
-def add_course(request):
-    if request.method == 'POST':
-        eventId = request.POST['eventID']
-        caseId = request.POST['studentID']
-        stu = Student.objects.get(case_id=caseId)
-        enroll = Enrollment(student_id=stu.pk, event_id=eventId)
-        enroll.save()
-        responseData = {}
-        responseData['eventID'] = eventId
-        responseData['studentID'] = caseId
-        return HttpResponse(json.dumps(responseData), content_type='application/json')
-        #return HttpResponse('Success', content_type='text/plain')
-    return HttpResponseBadRequest('Add Failed')
-
 #   The removecourse is a temporary view
 #   that is called when a user click
 #   an 'remove course' button. The view
@@ -373,20 +358,6 @@ def removecourse(request):
         enroll.delete()
         return HttpResponseRedirect('/scheduler/')
     raise Http404
-
-@csrf_protect
-def remove_course(request):
-    if request.method == 'POST':
-        eventId = request.POST['eventID']
-        caseId = request.POST['studentID']
-        stu = Student.objects.get(case_id=caseId)
-        enroll = Enrollment.objects.get(student_id=stu.pk, event_id=eventId)
-        enroll.delete()
-        responseData = {}
-        responseData['eventID'] = eventId
-        responseData['studentID'] = caseId
-        return HttpResponse(json.dumps(responseData), content_type='application/json')
-    return HttpResponseBadRequest('Remove Failed')
 
 #   The mycourses view function is another
 #   view function for the add.html page.

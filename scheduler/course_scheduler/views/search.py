@@ -7,8 +7,9 @@ Created on Aug 17, 2014
 from django.shortcuts import render
 from course_scheduler.models import *
 from course_scheduler.strings import Strings
+from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.db.models import Q
 from checklogin import check_login
 from checklogin import redirect_to_cas
@@ -24,6 +25,7 @@ def search(request):
     criterion = ''   
     
     if request.method == 'GET':  
+        ##checking if it matches something like EECS 132
         patt = re.compile('(\w{4}( )*(\d{1,4}|(\d{1.4}w)))')
         criterion = request.GET['criterion']
         originalCriterion = criterion;
@@ -52,3 +54,32 @@ def search(request):
     
     response = render(request, 'search_result.html', {'classes' : toSend, 'searchid' : originalCriterion, 'student_id' : id})
     return response
+
+@csrf_protect
+def add_course(request):
+    if request.method == 'POST':
+        eventId = request.POST['eventID']
+        caseId = request.POST['studentID']
+        stu = Student.objects.get(case_id=caseId)
+        enroll = Enrollment(student_id=stu.pk, event_id=eventId)
+        enroll.save()
+        responseData = {}
+        responseData['eventID'] = eventId
+        responseData['studentID'] = caseId
+        return HttpResponse(json.dumps(responseData), content_type='application/json')
+        #return HttpResponse('Success', content_type='text/plain')
+    return HttpResponseBadRequest('Add Failed')
+
+@csrf_protect
+def remove_course(request):
+    if request.method == 'POST':
+        eventId = request.POST['eventID']
+        caseId = request.POST['studentID']
+        stu = Student.objects.get(case_id=caseId)
+        enroll = Enrollment.objects.get(student_id=stu.pk, event_id=eventId)
+        enroll.delete()
+        responseData = {}
+        responseData['eventID'] = eventId
+        responseData['studentID'] = caseId
+        return HttpResponse(json.dumps(responseData), content_type='application/json')
+    return HttpResponseBadRequest('Remove Failed')
