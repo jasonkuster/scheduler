@@ -1,7 +1,7 @@
 function searchSuccess(data, textState, jqXHR)
 {
 	var html = new String(data);
-	if (html.substring(0, html.indexOf('</span>')).indexOf("'".concat($("#course_search").val()).concat("'") >= 0)
+	if (html.substring(0, html.indexOf('</span>')).indexOf("'".concat($("#course_search").val()).concat("'")) >= 0)
 	{
 		$("#search_result").html(data);
 	}
