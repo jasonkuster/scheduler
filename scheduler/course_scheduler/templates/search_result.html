@@ -32,11 +32,19 @@
 		</div>
 		
 		<div id="info-{{result.meeting.id}}" class="panel panel-info no-vertical-padding no-buffer" style="display: none">
-			<div class="panel-heading">{{result.meeting.meeting_class.classname}}<button class="btn btn-default btn-xs pull-right" onclick="HideInfo({{result.meeting.id}})"><span class="glyphicon glyphicon-remove"></span></button></div>
-				<table class="table table-codensed">
-					<tr><td style="padding-left: 15px">Location: {{result.meeting.meeting_location}}</td></tr>
-					<tr><td style="padding-left: 15px">Staff: {{result.instructor.name}}</td></tr>
-				</table>
+			<div class="panel-heading">
+				<div class="col-sm-8">
+					{{result.meeting.meeting_class.classname}}
+				</div>
+				<div class="col-sm-4">
+					<button class="btn btn-default btn-xs pull-right" onclick="HideInfo({{result.meeting.id}})"><span class="glyphicon glyphicon-remove"></span></button>
+				</div>
+			</div>
+			
+			<table class="table table-codensed">
+				<tr><td style="padding-left: 15px">Location: {{result.meeting.meeting_location}}</td></tr>
+				<tr><td style="padding-left: 15px">Staff: {{result.instructor.name}}</td></tr>
+			</table>
 				
 			<div class="panel-body">
 				{{result.meeting.meeting_class.description}}
