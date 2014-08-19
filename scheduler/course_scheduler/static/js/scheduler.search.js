@@ -16,6 +16,11 @@ function search()
 	}
 	else
 	{
-		$("#search_result").html('<div></div>');
+		clearResults();
 	}
+}
+
+function clearResults()
+{
+	$("#search_result").html('<div></div>');
 }
