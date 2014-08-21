@@ -18,9 +18,10 @@ import dateutil.parser
 from dateutil import rrule
 
 sys.path.append('/srv/www/scheduler/application/scheduler/cas/')
-from checklogin import check_login
-from checklogin import redirect_to_cas
+from cas.checklogin import check_login
+from cas.checklogin import redirect_to_cas
 
+CURRENT_TERM = "F2014"
 
 #   The view for schedule.html
 #   once the user has logged in
@@ -43,7 +44,7 @@ from checklogin import redirect_to_cas
 #   template which is returned to the
 #   webrowser as an HTTPresponse
 #   See https://docs.djangoproject.com/en/dev/topics/http/views/
-def schedule(request):
+def schedule(request, caseid = None, term=CURRENT_TERM):
     #check to see if the user is logged in
     #if not make the user login
     status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/')
@@ -53,14 +54,13 @@ def schedule(request):
     if cookie != "":
         setcookie = True
 
-
     colors = ['#FF0000', '#32E01B', '#003CFF', '#FF9D00', '#00B7FF', '#9D00FF', '#FF00EA', '#B5AA59', '#79BF6B', '#CFA27E']
 
-    stu, created = Student.objects.get_or_create(case_id=id)
+    stu, created = Student.objects.get_or_create(case_id=caseid)
     classes = []
     toSend = {}
     if created == False:
-        enrolls = Enrollment.objects.filter(student__case_id=id)
+        enrolls = Enrollment.objects.filter(student__case_id=caseid, term__name=term)
 
         for enroll in enrolls:
             event = Event.objects.get(id=enroll.event_id)
@@ -78,21 +78,27 @@ def schedule(request):
             del colors[randColor]
             toSend[event] = [top, height, color]
 
+    if id == caseid or caseid is None:
+        response = render(request, 'schedule.html', {'events' : toSend, 'id' : caseid})
+    else:
+        if stu.public:
+            response = render(request, 'viewschedule.html', {'events' : toSend, 'id' : caseid})
+        else:
+            raise Http404
 
-    response = render(request, 'schedule.html', {'events' : toSend, 'id' : id})
     if setcookie == True:
         response.__setitem__('Set-Cookie', cookie)
     return response
 
-def event_json(request):
+def event_json(request, caseid = None, term=CURRENT_TERM):
     status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/')
     setcookie = False
     if status == False:
         return redirect_to_cas('http://scheduler.acm.case.edu/scheduler/')
     if cookie != "":
         setcookie = True
-    stu = Student.objects.get(case_id=id)
-    enrolls = Enrollment.objects.filter(student__case_id=id)
+    stu = Student.objects.get(case_id=caseid or id)
+    enrolls = Enrollment.objects.filter(student__case_id=caseid or id, term__name=term)
 
     response_data = []
     for enroll in enrolls:
@@ -284,7 +290,7 @@ def new_search(request):
 #   template which is returned to the
 #   webrowser as an HTTPresponse
 #   See https://docs.djangoproject.com/en/dev/topics/http/views/
-def info(request):
+def info(request, term = CURRENT_TERM):
     #check to see if the user is logged in
     #if not make the user login
     status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/info/')
@@ -302,7 +308,7 @@ def info(request):
 
         toSend = {}
         for c in classes:
-            if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
+            if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id, term__name=term).exists():
                 toSend[c] = True
             else:
                 toSend[c] = False
@@ -362,7 +368,7 @@ def instructor(request):
 #   and pass that as a context to the add.html template
 #   and return as a HttpResponse
 #   See https://docs.djangoproject.com/en/dev/topics/http/views/
-def inscourse(request):
+def inscourse(request, term = CURRENT_TERM):
     #check to see if the user is logged in
     #if not make the user login
     status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/instructor/')
@@ -378,7 +384,7 @@ def inscourse(request):
         classes = Instructs.objects.filter(instructor=ins)
 
         for c in classes:
-            if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id).exists():
+            if Enrollment.objects.filter(student_id=id, event_id=c.meeting.id, term__name=term).exists():
                 toSend[c] = True
             else:
                 toSend[c] = False
@@ -483,7 +489,7 @@ def removecourse(request):
 #   and sends that dictionary as a context
 #   to add.html
 #   See https://docs.djangoproject.com/en/dev/topics/http/views/
-def mycourses(request):
+def mycourses(request, term=CURRENT_TERM):
     #check to see if the user is logged in
     #if not make the user login
     status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/instructor/')
@@ -494,7 +500,7 @@ def mycourses(request):
         setcookie = True
 
     toSend={}
-    eventIDs = Enrollment.objects.filter(student_id=id).values_list('event_id', flat=True)
+    eventIDs = Enrollment.objects.filter(student_id=id, term__name=term).values_list('event_id', flat=True)
     classes = Instructs.objects.filter(meeting_id__in=eventIDs)
 
     for c in classes:
@@ -550,7 +556,7 @@ def searchtest(request):
 #   (see below) and return the rendered
 #   custom.html page as a HttpResponse.
 #   See https://docs.djangoproject.com/en/dev/topics/http/views/
-def customevent(request):
+def customevent(request, term=CURRENT_TERM):
     #check to see if the user is logged in
     #if not make the user login
     status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/instructor/')
@@ -599,7 +605,8 @@ def customevent(request):
             event.save()
 
             stu = Student.objects.get(case_id=id)
-            enroll = Enrollment(student_id=stu.pk, event_id=event.id)
+            term_obj = Term.objects.get(name=term)
+            enroll = Enrollment(student_id=stu.pk, event_id=event.id, term_id=term_obj)
             enroll.save()
 
             return HttpResponseRedirect('/scheduler/')
@@ -610,55 +617,6 @@ def customevent(request):
     if setcookie == True:
         response.__setitem__('Set-Cookie', cookie)
     return response
-
-def share(request):
-    #check to see if the user is logged in
-    #if not make the user login
-    status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/instructor/')
-    setcookie = False
-    if status == False:
-        return redirect_to_cas('http://scheduler.acm.case.edu/scheduler/instructor/')
-    if cookie != "":
-        setcookie = True
-    share_ids = Shares.objects.values_list('shareid', flat=True)
-    rand = random.randint(1111111111, 9999999999)
-    while rand in share_ids:
-        rand = random.randint(1111111111, 9999999999)
-
-
-
-#This function does no require login and
-#checks the database for a shared schedule
-#with the same share id it has, then displays
-#the shared schedule.
-
-def shareview(request, share):
-    colors = ['#FF0000', '#32E01B', '#003CFF', '#FF9D00', '#00B7FF', '#9D00FF', '#FF00EA', '#B5AA59', '#79BF6B', '#CFA27E']
-
-    classes = []
-    toSend = {}
-    shares = Shares.objects.filter(shareid=share)
-    if shares == None:
-        raise Http404
-
-    for enroll in shares:
-        event = Event.objects.get(id=enroll.event_id)
-        top = event.start_time.hour - 6
-        top += event.start_time.minute / 60.0
-        top *= 75
-        top += 135
-        height = event.start_time.hour + (event.start_time.minute / 60.0)
-        height = (event.end_time.hour + event.end_time.minute / 60.0) - height
-        height *= 60
-        height *= 1.2
-        height += 3
-        randColor = random.randint(0, len(colors)-1)
-        color = colors[randColor] + ''
-        del colors[randColor]
-        toSend[event] = [top, height, color]
-    response = render(request, 'view.html', {'events' : toSend})
-    return response
-
 
 #   This function is the validation function for
 #   the times field in EventForm. It uses regexes

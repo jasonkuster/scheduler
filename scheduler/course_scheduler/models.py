@@ -5,7 +5,7 @@ class Class(models.Model):
     dept = models.CharField(max_length=10)
     classname = models.CharField(max_length=350)
     description = models.CharField(max_length = 4096)
-    term = models.CharField(max_length = 30)
+    term = models.ForeignKey('Term')
 
 class Event(models.Model):
     start_time = models.TimeField()
@@ -23,7 +23,7 @@ class MeetingTime(Event):
     meeting_location = models.CharField(max_length=50)
 
 class Instructor(models.Model):
-    email = models.CharField(max_length=10)
+    email = models.CharField(max_length=50)
     name = models.CharField(max_length = 50, primary_key=True)
     office = models.CharField(max_length = 15)
 
@@ -32,16 +32,15 @@ class Instructs(models.Model):
     meeting = models.ForeignKey('MeetingTime')
 
 class Student(models.Model):
-    case_id = models.CharField(max_length=6, primary_key=True)
+    case_id = models.CharField(max_length=7, primary_key=True)
+    name = models.CharField(max_length = 20)
+    public = models.BooleanField(default=False)
+
+class Term(models.Model):
+    term_id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=5)
 
 class Enrollment(models.Model):
     student = models.ForeignKey('Student')
     event = models.ForeignKey('Event')
-
-class PublicSchedule(models.Model):
-    student = models.ForeignKey('Student')
-    schedule_string = models.CharField(max_length=18, primary_key=True)
-
-class Shares(models.Model):
-    shareid = models.IntegerField()
-    event = models.ForeignKey('Event')
+    term = models.ForeignKey('Term')

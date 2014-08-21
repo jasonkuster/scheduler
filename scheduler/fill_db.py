@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from bs4 import BeautifulSoup
-from course_scheduler.models import Class, MeetingTime, Instructor, Instructs, Event
+from course_scheduler.models import Class, MeetingTime, Instructor, Instructs, Event, Term
 import course_scheduler
 import sys
 import re
@@ -59,40 +59,46 @@ def main(opened_file):
 # for every term, for every class, add the class
 
     for curr_term in b.find_all('term'):
-
         classes = curr_term.classes.find_all('class')
-        term_name = unicode(curr_term.descr.contents[0])
+        term_name = curr_term.descr.contents[0].encode('utf-8')
+
+        semester, year = term_name.split()
+        if semester == 'Spring':
+            semester = 'S'
+        elif semester == 'Fall':
+            semester = 'F'
+        elif semester == 'Summer':
+            semester = 'U'
+        term_model = Term(term_id=int(curr_term['code']), name=semester + str(year))
+        print semester + str(year)
+        term_model.save()
 
         for c in classes:
-            c_num = c.catalognbr.contents[0]
-            d = c.subject.contents[0]
-            name = c.coursetitlelong.contents[0]
             try:
-                desc = c.description.contents[0]
-            except AttributeError:
-                try:
-                    desc = c.classnotes.contents[0]
-                except AttributeError:
-                    desc = ""
-
-            try:
-                c_num = int(re.search(r'\d+', c_num).group())
-            except Exception:
+                c_num = c.catalognbr.contents[0]
                 print c_num
-                c_num = int(c_num)
-            try:
-                d = unicode(d)
-                name = unicode(name)
+                d = c.subject.contents[0].encode('utf-8')
+                name = c.coursetitlelong.contents[0].encode('utf-8')
+                try:
+                    desc = c.description.contents[0].encode('utf-8')
+                except AttributeError:
+                    try:
+                        desc = c.classnotes.contents[0].encode('utf-8')
+                    except AttributeError:
+                        desc = ""
+
+                try:
+                    c_num = int(re.search(r'\d+', c_num).group())
+                except Exception:
+                    c_num = int(c_num)
                 if len(desc) > 4096:
                     desc = desc[:4095]
-                desc = unicode(desc)
-                print 'adding:  ' + ' '.join([unicode(c_num), unicode(d), unicode(name), unicode(desc), unicode(term_name)])
+                c_model = Class(class_number=c_num, dept=d, classname=name, description=desc, term=term_model)
+                c_model.save()
             except ValueError,UnicodeEncodeError:
                 # if they have non-unicode characters in their description, we don't add it to the DB.
                 continue
 
-            c_model = Class(class_number=c_num, dept=d, classname=name, description=desc, term=term_name)
-            c_model.save()
 
 # if there are meetings, find and add them.  If there are no meetings, don't add any.
 
@@ -101,10 +107,7 @@ def main(opened_file):
             except AttributeError:
                 continue
 
-            print 'meetings for this class:'
-
             for meeting in meetings:
-                print meeting
                 dates = meeting.meetingdates.contents[0]
                 times = meeting.daystimes.contents[0]
                 room = unicode(meeting.room.contents[0])
@@ -123,7 +126,6 @@ def main(opened_file):
                 s_date = format_date(s_date)
                 e_date = format_date(e_date)
 
-                print 'adding:  ' + ' '.join([str(s_date), str(e_date), str(weekdays), str(room), str(s_time), str(e_time)])
                 m = MeetingTime(meeting_class = c_model, meeting_location = room, start_date = s_date, end_date = e_date, recur_type = weekdays, start_time = s_time, end_time = e_time)
                 m.save()
 
