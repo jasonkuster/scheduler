@@ -9,8 +9,8 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-with open('settings.secret') as settings_file:
-    db_settings = json.load(settings_file)
+#with open('settings.secret') as settings_file:
+#    db_settings = json.load(settings_file)
 
 DATABASES = {
 #    'default': {
@@ -24,11 +24,11 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': db_settings['dbname'],                      # Or path to database file if using sqlite3.
-        'USER': db_settings['username'],                      # Not used with sqlite3.
-        'PASSWORD': db_settings['password'],                  # Not used with sqlite3.
-        'HOST': db_settings.get('host', ''),                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': db_settings.get('port', ''),                      # Set to empty string for default. Not used with sqlite3.
+        'NAME': 'django_scheduler', # db_settings['dbname'],                      # Or path to database file if using sqlite3.
+        'USER': 'root', # db_settings['username'],                      # Not used with sqlite3.
+        'PASSWORD': 'scheduleradmin', # db_settings['password'],                  # Not used with sqlite3.
+        'HOST': '', # db_settings.get('host', ''),                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '', # db_settings.get('port', ''),                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
