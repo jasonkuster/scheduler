@@ -9,6 +9,7 @@
 *.gz
 *.dvi
 local_settings.py
+*.secret
 stuarts/
 soc/
 /.project

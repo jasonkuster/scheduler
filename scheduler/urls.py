@@ -5,8 +5,10 @@ Created on Nov 14, 2012
 '''
 
 from django.conf.urls import patterns, url, include
+from django.http import HttpResponseRedirect
 
 urlpatterns = patterns('',
+	url(r'^$', lambda r : HttpResponseRedirect('scheduler/')),	
     url(r'^scheduler/$', 'course_scheduler.views.old_views.schedule', name='base'),
     url(r'^scheduler/add/$', 'course_scheduler.views.old_views.add', name='add'),
     url(r'^scheduler/info$', 'course_scheduler.views.old_views.info', name='info'),
@@ -24,4 +26,6 @@ urlpatterns = patterns('',
     url(r'^scheduler/search/$', 'course_scheduler.views.search.search', name='search'),
     url(r'^scheduler/add_course/$', 'course_scheduler.views.search.add_course', name='add_course'),
     url(r'^scheduler/remove_course/$', 'course_scheduler.views.search.remove_course', name='remove_course'),
+	url(r'^scheduler/calendar_test/$', 'course_scheduler.views.old_views.calendar_test', name='calendar_test'),
+    url(r'^scheduler/event_json$', 'course_scheduler.views.old_views.event_json', name='event_json'),
 )

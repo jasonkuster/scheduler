@@ -1,4 +1,5 @@
 # Django settings for sampleDjango project.
+import json
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -8,6 +9,8 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+with open('settings.secret') as settings_file:
+    db_settings = json.load(settings_file)
 
 DATABASES = {
 #    'default': {
@@ -21,11 +24,11 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'django_scheduler',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'scheduleradmin',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'NAME': db_settings['dbname'],                      # Or path to database file if using sqlite3.
+        'USER': db_settings['username'],                      # Not used with sqlite3.
+        'PASSWORD': db_settings['password'],                  # Not used with sqlite3.
+        'HOST': db_settings.get('host', ''),                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': db_settings.get('port', ''),                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -106,7 +109,7 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'scheduler.urls'
+ROOT_URLCONF = 'urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'scheduler.wsgi.application'
