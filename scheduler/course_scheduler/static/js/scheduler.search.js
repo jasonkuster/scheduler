@@ -1,9 +1,9 @@
 function searchSuccess(data, textState, jqXHR)
 {
-	var html = new String(data);
-	if (html.substring(0, html.indexOf('</span>')).indexOf("'".concat($("#course_search").val()).concat("'")) >= 0)
+	if (data.substring(0, data.indexOf('</span>')).indexOf("'".concat($("#course_search").val()).concat("'")) >= 0)
 	{
-		$("#result", data).each(function() {
+		var html = $.parseHTML(data);
+		$("#result", html).each(function() {
 			$("search_result").append($(this));
 		});
 		//$("#search_result").html(data);
