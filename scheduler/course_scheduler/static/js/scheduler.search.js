@@ -2,7 +2,8 @@ function searchSuccess(data, textState, jqXHR)
 {
 	if (data.substring(0, data.indexOf('</span>')).indexOf("'".concat($("#course_search").val()).concat("'")) >= 0)
 	{
-		$.parseHTML(data).each(function(index, element) {
+		var html = $.parseHTML(data);
+		$(html).each(function(index, element) {
 			if ($(element).attr("id") === "result")
 			{
 				$("search_result").append(element);
