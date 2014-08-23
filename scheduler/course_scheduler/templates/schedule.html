@@ -14,12 +14,20 @@
 
 <script src="{{ STATIC_URL }}jquery-2.1.1.min.js"></script>
 <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
-<script src="{{ STATIC_URL }}js/scheduler.csrf_util.js"></script>
 <script src="{{ STATIC_URL }}js/scheduler.search.js"></script>
 <script src='{{ STATIC_URL }}js/fullcalendar/lib/jquery.min.js'></script>
 <script src='{{ STATIC_URL }}js/fullcalendar/lib/moment.min.js'></script>
 <script src='{{ STATIC_URL }}js/fullcalendar/fullcalendar.js'></script>
+
+<script>
+$.getScript("{{ STATIC_URL }}js/jquery.cookie.js", function(){
+
+	$.getScript("{{ STATIC_URL }}js/scheduler.csrf_util.js", function(){
+			initializeCSRF();
+		});
+	});
+</script>
+
 
 <style type='text/css'>
 #calendar {
