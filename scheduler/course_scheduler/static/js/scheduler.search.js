@@ -8,14 +8,13 @@ function searchSuccess(data, textState, jqXHR)
 			if ($(element).attr("id") === "result")
 			{
 				$("#search_result").append(element);
-				function() {
-				    var $lefty = $(element).next();
-				    $lefty.animate({
-				      left: parseInt($lefty.css('left'),10) == 0 ?
-				        -$lefty.outerWidth() :
-				        0
-				    });
-				  });
+				var $lefty = $(element).next();
+				$lefty.animate({
+					left: parseInt($lefty.css('left'),10) == 0 ?
+							$lefty.outerWidth() :
+								0
+					});
+				});
 			}
 		});
 		//$("#search_result").html(data);
