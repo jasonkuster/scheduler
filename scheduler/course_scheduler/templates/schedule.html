@@ -33,30 +33,29 @@
 
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="row-fluid" style="height: calc(100%)">
-		  <div class="col-md-6 col-md-offset-3 col-sm-8">
-		  <nav class="navbar navbar-default" role="navigation">
-				<div class="container-fluid">
-	  				<div class="navbar-header">
-	      				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#scheduler-navbar">
-		        			<span class="sr-only">Toggle navigation</span>
-		        			<span class="icon-bar"></span>
-					        <span class="icon-bar"></span>
-					        <span class="icon-bar"></span>
-				      	</button>
-			    	</div>
-	
-				    <div class="collapse navbar-collapse" id="scheduler-navbar">
-				      <ul class="nav navbar-nav">
-						<li><a href="/scheduler/customevent">Custom Event</a></td>
-						<li><a href="/scheduler/about">About</a></td>
-					</ul>
-				    </div><!-- /.navbar-collapse -->
-			  	</div><!-- /.container-fluid -->
-			</nav>
+	<div class="container-fluid" style="height: calc(100%)">
+		<div class="row-fluid">
+			<div class="col-md-6 col-md-offset-3 col-sm-8">
+				<nav class="navbar navbar-default" role="navigation">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#scheduler-navbar">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="collapse navbar-collapse" id="scheduler-navbar">
+							<ul class="nav navbar-nav">
+								<li><a href="/scheduler/customevent">Custom Event</a></td>
+								<li><a href="/scheduler/about">About</a></td>
+							</ul>
+						</div><!-- /.navbar-collapse -->
+					</div><!-- /.container-fluid -->
+				</nav>
 			<div style="background-color: #C1D7E1">
-		    <h1>Scheduler - Alpha</h1>
+				<h1>Scheduler - Alpha</h1>
 				<div id='calendar'>
 				</div>
 				<script>
@@ -73,11 +72,11 @@
 					});
 				</script>
 			</div>
-			<div class="col-md-3 col-sm-4">
-				<div id="search-wrapper" class="search-wrapper">
-					<input type="text" id="course_search" class="form-control" placeholder="Search" type="search" onkeyup="search()"> 
-					<div id="search_result" class="side-searchbar">
-					</div>
+		</div><!--  end left column -->
+		<div class="col-md-3 col-sm-4">
+			<div id="search-wrapper" class="search-wrapper">
+				<input type="text" id="course_search" class="form-control" placeholder="Search" type="search" onkeyup="search()"> 
+				<div id="search_result" class="side-searchbar">
 				</div>
 			</div>
 		</div>
