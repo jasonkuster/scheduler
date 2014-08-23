@@ -3,7 +3,7 @@ function searchSuccess(data, textState, jqXHR)
 	if (data.substring(0, data.indexOf('</span>')).indexOf("'".concat($("#course_search").val()).concat("'")) >= 0)
 	{
 		$("#search_result").empty();
-		var html = $.parseHTML(data);
+		var html = $.parseHTML(data, true);
 		$(html).each(function(index, element) {
 			if ($(element).attr("id") === "result")
 			{
