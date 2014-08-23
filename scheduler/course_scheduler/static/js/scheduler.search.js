@@ -8,9 +8,8 @@ function searchSuccess(data, textState, jqXHR)
 			if ($(element).attr("id") === "result")
 			{
 				$("#search_result").append(element);
-				var $lefty = $(element).next();
 				$(element).animate({
-						left: parseInt($(element).css('left'),10) == 0 ? $(element).outerWidth() : 0
+						right: 0
 				});
 			}
 		});
