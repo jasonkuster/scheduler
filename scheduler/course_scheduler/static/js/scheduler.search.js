@@ -13,7 +13,6 @@ function searchSuccess(data, textState, jqXHR)
 					left: parseInt($lefty.css('left'),10) == 0 ?
 							$lefty.outerWidth() :
 								0
-					});
 				});
 			}
 		});
