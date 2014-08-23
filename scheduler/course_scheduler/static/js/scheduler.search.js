@@ -6,7 +6,7 @@ function searchSuccess(data, textState, jqXHR)
 		$(html).each(function(index, element) {
 			if ($(element).attr("id") === "result")
 			{
-				$("search_result").append(element);
+				$("#search_result").append(element);
 			}
 		});
 		//$("#search_result").html(data);
