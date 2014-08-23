@@ -4,6 +4,16 @@
 <script src="{{STATIC_URL}}js/scheduler.search_result.js"></script>
 	
 	{% for result, inSchedule in classes.iteritems %}
+	<script>
+	
+	$(document).ready(function() {
+		var $lefty = $("result-{{result.meeting.id}}").next();
+		$.lefty.animate({
+			left: parseInt($lefty.css('left', 10) == 0 ? -$lefty.outerWidth() : 0)
+			});
+		});
+	</script>
+	<div id="result-{{result.meeting.id}}">
 		<div class="well well-sm result-well panel panel-default">
 			<div class="panel-body no-vertical-padding">
 				<div class="col-sm-8">
@@ -42,12 +52,14 @@
 			<table class="table table-codensed">
 				<tr><td style="padding-left: 15px">Location: {{result.meeting.meeting_location}}</td></tr>
 				<tr><td style="padding-left: 15px">Staff: {{result.instructor.name}}</td></tr>
+				<tr><td style="padding-left: 15px">&nbsp</td></tr> 
 			</table>
 				
 			<div class="panel-body">
 				{{result.meeting.meeting_class.description}}
 			</div>
 		</div>	
+	</div>
 	{% endfor %}
 {% else %}
 	<div><h4>NO RESULTS FOUND</h4></div>
