@@ -4,16 +4,7 @@
 <script src="{{STATIC_URL}}js/scheduler.search_result.js"></script>
 	
 	{% for result, inSchedule in classes.iteritems %}
-	<script>
-	
-	$(document).ready(function() {
-		var $lefty = $("result-{{result.meeting.id}}").next();
-		$.lefty.animate({
-			left: parseInt($lefty.css('left', 10) == 0 ? -$lefty.outerWidth() : 0)
-			});
-		});
-	</script>
-	<div id="result-{{result.meeting.id}}">
+	<div id="result">
 		<div class="well well-sm result-well panel panel-default">
 			<div class="panel-body no-vertical-padding">
 				<div class="col-sm-8">
