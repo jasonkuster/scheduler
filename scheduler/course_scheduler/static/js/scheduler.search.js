@@ -7,6 +7,7 @@ function searchSuccess(data, textState, jqXHR)
 		$(html).each(function(index, element) {
 			if ($(element).attr("id") === "result")
 			{
+				$(element).css("right", 50);
 				$("#search_result").append(element);
 				$(element).animate({
 						right: 0
