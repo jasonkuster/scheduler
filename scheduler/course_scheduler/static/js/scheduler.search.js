@@ -8,7 +8,7 @@ function searchSuccess(data, textState, jqXHR)
 			if ($(element).attr("id") === "result")
 			{
 				$(element).css("right", 50);
-				$(element).hide().appendTo($("#search_result")).slideDown(3000);
+				$(element).hide().appendTo($("#search_result")).fadeIn();
 			}
 		});
 		//$("#search_result").html(data);
