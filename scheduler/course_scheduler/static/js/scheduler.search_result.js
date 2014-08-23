@@ -46,10 +46,10 @@ function ToggleInfo(eventID)
 
 function ShowInfo(eventID)
 {
-	$("#info-".concat(eventID)).show();
+	$("#info-".concat(eventID)).slideDown();
 }
 
 function HideInfo(eventID)
 {
-	$("#info-".concat(eventID)).hide();
+	$("#info-".concat(eventID)).slideUp();
 }
