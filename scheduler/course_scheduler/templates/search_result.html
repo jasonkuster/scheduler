@@ -1,6 +1,8 @@
 <span id='{{searchid}}'></span>
 
 {% if classes|length > 0 %}
+<script src="{{STATIC_URL}}js/scheduler.search_result.js"></script>
+	
 	{% for result, inSchedule in classes.iteritems %}
 	<div id="result" style="left: 0">
 		<div class="well well-sm result-well panel panel-default">
