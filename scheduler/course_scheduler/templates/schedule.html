@@ -60,23 +60,27 @@ $.getScript("{{ STATIC_URL }}js/jquery.cookie.js", function(){
 						</div><!-- /.navbar-collapse -->
 					</div><!-- /.container-fluid -->
 				</nav>
-			<div style="background-color: #C1D7E1">
-				<h1>Scheduler - Alpha</h1>
-				<div id='calendar'>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h1>Scheduler - Alpha</h1>
 				</div>
-				<script>
-					$('document').ready(function() {
-						$('#calendar').fullCalendar({
-							defaultView: 'agendaWeek',
-							defaultDate: '2014-08-25',
-							editable: false,
-							minTime: "08:00:00",
-							maxTime: "22:00:00",
-							allDaySlot: false,
-							events: 'event_json'
+				<div class="panel-body">
+					<div id='calendar'>
+					</div>
+					<script>
+						$('document').ready(function() {
+							$('#calendar').fullCalendar({
+								defaultView: 'agendaWeek',
+								defaultDate: '2014-08-25',
+								editable: false,
+								minTime: "08:00:00",
+								maxTime: "22:00:00",
+								allDaySlot: false,
+								events: 'event_json'
+							});
 						});
-					});
-				</script>
+					</script>
+				</div>
 			</div>
 		</div><!--  end left column -->
 		<div class="col-md-3 col-sm-4">
