@@ -32,46 +32,54 @@
 </head>
 <body>
 	<div class="scheduler-container container-fluid">
-			<div id="top">
-				<table id="header">
-					<tr>
-						<td class="menuitem"><a href="/scheduler/add">Add a Course</a></td>
-						<td class="menuitem"><a href="/scheduler/inssearch">Search for a Professor</a></td>
-						<td class="menuitem"><a href="/scheduler/mycourses">My Courses</a></td>
-						<td class="menuitem"><a href="/scheduler/customevent">Custom Event</a></td>
-						<td style="float:right;"><a href="/scheduler/about">About</a></td>
-					</tr>
-				</table>
-			</div>
+			<nav class="navbar navbar-default" role="navigation">
+				<div class="container-fluid">
+	  				<div class="navbar-header">
+	      				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#scheduler-navbar">
+		        			<span class="sr-only">Toggle navigation</span>
+		        			<span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+				      	</button>
+			    	</div>
 	
-	<div class="row-fluid" >
-	  <div class="content col-md-6 col-md-offset-3 col-sm-8">
-	  	<p>&nbsp;</p>
-	    <h1>Scheduler - Alpha</h1>
-			<div id='calendar' >
-			</div>
-			<script>
-				$('document').ready(function() {
-					$('#calendar').fullCalendar({
-						defaultView: 'agendaWeek',
-						defaultDate: '2014-08-25',
-						editable: false,
-						minTime: "08:00:00",
-						maxTime: "22:00:00",
-						allDaySlot: false,
-						events: 'event_json'
+				    <div class="collapse navbar-collapse" id="scheduler-navbar">
+				      <ul class="nav navbar-nav">
+						<li><a href="/scheduler/customevent">Custom Event</a></td>
+						<li><a href="/scheduler/about">About</a></td>
+					</ul>
+				    </div><!-- /.navbar-collapse -->
+			  	</div><!-- /.container-fluid -->
+			</nav>
+	
+		<div class="row-fluid" >
+		  <div class="content col-md-6 col-md-offset-3 col-sm-8">
+		  	<p>&nbsp;</p>
+		    <h1>Scheduler - Alpha</h1>
+				<div id='calendar'>
+				</div>
+				<script>
+					$('document').ready(function() {
+						$('#calendar').fullCalendar({
+							defaultView: 'agendaWeek',
+							defaultDate: '2014-08-25',
+							editable: false,
+							minTime: "08:00:00",
+							maxTime: "22:00:00",
+							allDaySlot: false,
+							events: 'event_json'
+						});
 					});
-				});
-			</script>
-		</div>
-		<div class="col-md-3 col-sm-4">
-			<div id="search-wrapper" class="search-wrapper">
-				<input type="text" id="course_search" class="form-control" placeholder="Search" type="search" onkeyup="search()"> 
-				<div id="search_result" class="side-searchbar">
+				</script>
+			</div>
+			<div class="col-md-3 col-sm-4">
+				<div id="search-wrapper" class="search-wrapper">
+					<input type="text" id="course_search" class="form-control" placeholder="Search" type="search" onkeyup="search()"> 
+					<div id="search_result" class="side-searchbar">
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div><!-- end .container -->
+	</div><!-- end .container -->
 </body>
 </html>
