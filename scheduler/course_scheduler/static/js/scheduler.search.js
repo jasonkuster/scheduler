@@ -9,10 +9,8 @@ function searchSuccess(data, textState, jqXHR)
 			{
 				$("#search_result").append(element);
 				var $lefty = $(element).next();
-				$lefty.animate({
-					left: parseInt($lefty.css('left'),10) == 0 ?
-							$lefty.outerWidth() :
-								0
+				$(element).animate({
+						left: parseInt($(element).css('left'),10) == 0 ? $(element).outerWidth() : 0
 				});
 			}
 		});
