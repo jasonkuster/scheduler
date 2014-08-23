@@ -9,7 +9,7 @@ function searchSuccess(data, textState, jqXHR)
 			{
 				$(element).css("right", 50);
 				$("#search_result").append(element);
-				$(element).fadeIn();
+				$(element).hide().fadeIn();
 			}
 		});
 		//$("#search_result").html(data);
