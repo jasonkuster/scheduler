@@ -9,9 +9,7 @@ function searchSuccess(data, textState, jqXHR)
 			{
 				$(element).css("right", 50);
 				$("#search_result").append(element);
-				$(element).animate({
-						right: 0
-				});
+				$(element).fadeIn();
 			}
 		});
 		//$("#search_result").html(data);
