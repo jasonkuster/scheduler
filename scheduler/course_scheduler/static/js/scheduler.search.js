@@ -3,7 +3,7 @@ function searchSuccess(data, textState, jqXHR)
 	if (data.substring(0, data.indexOf('</span>')).indexOf("'".concat($("#course_search").val()).concat("'")) >= 0)
 	{
 		var html = $.parseHTML(data);
-		$("#result", html).each(function() {
+		$("#result", html).each(function(index) {
 			$("search_result").append($(this));
 		});
 		//$("#search_result").html(data);
