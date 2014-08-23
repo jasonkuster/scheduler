@@ -5,7 +5,7 @@ function Add(eventID, studentID)
 
 function AddSuccess(data, textState, jqXHR)
 {
-	$('#calendar').fullCalendar('refreshEvents');
+	$("#calendar").fullCalendar("refetchEvents");
 	setRemoveButton(data.eventID, data.studentID);
 }
 
@@ -16,7 +16,7 @@ function Remove(eventID, studentID)
 
 function RemoveSuccess(data, textState, jqXHR)
 {
-	$('#calendar').fullCalendar('refreshEvents');
+	$("#calendar").fullCalendar("refetchEvents");
 	setAddButton(data.eventID, data.studentID);
 }
 
