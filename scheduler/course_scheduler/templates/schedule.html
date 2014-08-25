@@ -43,7 +43,7 @@ $.getScript("{{ STATIC_URL }}js/jquery.cookie.js", function(){
 	<div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="event-modal-label" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="/scheduler/customevent" method="post" class="form" role="form" data-dismiss="modal">{% csrf_token %}
+				<form action="/scheduler/customevent" method="post" class="form" role="form">{% csrf_token %}
 					<div class="modal-header">
 						<h4 class="modal-title" id="event-modal-label">Create Custom Event</h4>
 					</div>
@@ -52,6 +52,9 @@ $.getScript("{{ STATIC_URL }}js/jquery.cookie.js", function(){
 							<div class="row-fluid">
 								<div class="col-md-6 form-group">
 									<input class="form-control" onkeypress="return event.keyCode != 13;" type="text" id="{{ eventForm.event_title.id_for_tag }}" placeholder="Title"></input>
+								</div>
+								<div class="col-md-6 form-group">
+									<input class="form-control" onkeypress="return event.keyCode != 13;" type="text" id="{{ eventForm.location.id_for_tag }}" placeholder="Location"></input>
 								</div>
 							</div>
 						</div>
