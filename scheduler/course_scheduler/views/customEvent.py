@@ -55,7 +55,7 @@ def customevent(request):
                 dayStr += 'Sa'
 
             #event = CustomEvent(start_time=datetime.time(startTimeArr[0], startTimeArr[1]), end_time=datetime.time(endTimeArr[0], endTimeArr[1]), recur_type=days, event_name=name)
-            event = CustomEvent(start_time=datetime.time(start_time, end_time), end_time=datetime.time(endTimeArr[0], endTimeArr[1]), start_date=sdate, end_date=edate, recur_type=dayStr, event_name=name, location=loc)
+            event = CustomEvent(start_time=datetime.time(18, 00), end_time=datetime.time(20, 0), start_date=sdate, end_date=edate, recur_type=dayStr, event_name=name, location=loc)
             event.save()
 
             stu = Student.objects.get(case_id=id)
