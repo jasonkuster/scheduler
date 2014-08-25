@@ -15,42 +15,6 @@ from checklogin import check_login
 from checklogin import redirect_to_cas
 
 
-class EventForm(forms.Form):
-    event_title=forms.CharField(max_length=100)
-    location=forms.CharField(max_length=100, required=False)
-    times=forms.CharField(max_length=20, validators=[validate_time])
-    start_date=forms.DateField()
-    end_date=forms.DateField()
-    #days=forms.CharField(max_length=14, validators=[validate_day])
-    CHOICES=((0,'M'),(0,'Tu'),(0,'W'),(0,'Th'),(0,'F'),(0,'Sa'),(0,'Su'))
-    m = forms.BooleanField(label="day", required=False)
-    tu = forms.BooleanField(label="day", required=False)
-    w = forms.BooleanField(label="day", required=False)
-    th = forms.BooleanField(label="day", required=False)
-    f = forms.BooleanField(label="day", required=False)
-    sa = forms.BooleanField(label="day", required=False)
-    su = forms.BooleanField(label="day", required=False)
-    
-def validate_time(value):
-    validAMs = '([6-9]|10|11|12):[0-5][0-9](am|AM)'
-    validPMs = '([1-9]|12):[0-5][0-9](pm|PM)'
-    validTimes = '(' + validAMs + '( )*-( )*' + validAMs + ')|(' + validAMs + '( )*-( )*' + validPMs + ')|(' + validPMs + '( )*-( )*' + validPMs + ')'
-
-    patt = re.compile(validTimes)
-    if not patt.match(value):
-        raise ValidationError('%s is not a valid time format!' % value)
-
-    if not ""==(re.sub(validTimes, "", value)):
-        raise ValidationError('%s is not a valid time format!' % value)
-
-    startTimeArr, endTimeArr = parse_time(value)
-
-    actSTime = startTimeArr[0] + startTimeArr[1] / 60.0
-    actETime = endTimeArr[0] + endTimeArr[1] / 60.0
-
-    if actSTime >= actETime:
-        raise ValidationError('Start Time must be after end Time!')
-    
 def parse_time(array):
     timeArr = array.split('-')
     timeArr[0]=re.sub(r'( )+', "", timeArr[0])
@@ -73,6 +37,26 @@ def parse_time(array):
             endTimeArr[0] = endTimeArr[0] + 12
     return startTimeArr, endTimeArr
     
+def validate_time(value):
+    validAMs = '([6-9]|10|11|12):[0-5][0-9](am|AM)'
+    validPMs = '([1-9]|12):[0-5][0-9](pm|PM)'
+    validTimes = '(' + validAMs + '( )*-( )*' + validAMs + ')|(' + validAMs + '( )*-( )*' + validPMs + ')|(' + validPMs + '( )*-( )*' + validPMs + ')'
+
+    patt = re.compile(validTimes)
+    if not patt.match(value):
+        raise ValidationError('%s is not a valid time format!' % value)
+
+    if not ""==(re.sub(validTimes, "", value)):
+        raise ValidationError('%s is not a valid time format!' % value)
+
+    startTimeArr, endTimeArr = parse_time(value)
+
+    actSTime = startTimeArr[0] + startTimeArr[1] / 60.0
+    actETime = endTimeArr[0] + endTimeArr[1] / 60.0
+
+    if actSTime >= actETime:
+        raise ValidationError('Start Time must be after end Time!')
+    
 def schedule(request):
     #check to see if the user is logged in
     #if not make the user login
@@ -89,3 +73,19 @@ def schedule(request):
     if setcookie == True:
         response.__setitem__('Set-Cookie', cookie)
     return response
+
+class EventForm(forms.Form):
+    event_title=forms.CharField(max_length=100)
+    location=forms.CharField(max_length=100, required=False)
+    times=forms.CharField(max_length=20, validators=[validate_time])
+    start_date=forms.DateField()
+    end_date=forms.DateField()
+    #days=forms.CharField(max_length=14, validators=[validate_day])
+    CHOICES=((0,'M'),(0,'Tu'),(0,'W'),(0,'Th'),(0,'F'),(0,'Sa'),(0,'Su'))
+    m = forms.BooleanField(label="day", required=False)
+    tu = forms.BooleanField(label="day", required=False)
+    w = forms.BooleanField(label="day", required=False)
+    th = forms.BooleanField(label="day", required=False)
+    f = forms.BooleanField(label="day", required=False)
+    sa = forms.BooleanField(label="day", required=False)
+    su = forms.BooleanField(label="day", required=False)
