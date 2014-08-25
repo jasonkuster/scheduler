@@ -64,9 +64,17 @@ function redraw(elementID)
 	},20);
 }
 
+$.fn.redraw = function(){
+	  $(this).each(function(){
+	    var redraw = this.offsetHeight;
+	  });
+	};
+
 function HideInfo(eventID)
 {
-	$("#info-".concat(eventID)).slideUp();
-	redraw("#info-".concat(eventID));
+	$("#info-".concat(eventID)).slideUp(function(){
+		$("#info-".concat(eventID)).redraw();
+	});
+	
 }
 
