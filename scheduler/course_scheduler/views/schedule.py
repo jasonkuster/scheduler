@@ -9,7 +9,7 @@ from django.core.exceptions import ValidationError
 from course_scheduler.strings import Strings
 from django.http import HttpResponseRedirect
 from course_scheduler.models import *
-import course_scheduler.views.customEvent.EventForm
+import scheduler.course_scheduler.views.customEvent.EventForm
 import datetime
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 import re
@@ -29,7 +29,7 @@ def schedule(request):
     if cookie != "":
         setcookie = True
         
-    eventForm = course_scheduler.views.customEvent.EventForm()
+    eventForm = scheduler.course_scheduler.views.customEvent.EventForm()
 
     response = render(request, 'schedule.html', {'eventForm' : eventForm, 'id' : id})
     if setcookie == True:
