@@ -50,24 +50,6 @@
 	width: calc(100%);
 }
 
-#active-link
-{
-	color: #777;
-	outline: 0;
-}
-
-.scheduler-link:visited
-{
-	color: #777;
-	outline: 0;
-}
-
-.scheduler-link:active
-{
-	color: #777;
-	outline: 0;
-}
-
 .scheduler-link:focus
 {
 	color: #777;
