@@ -66,8 +66,8 @@ function redraw(elementID)
 
 function HideInfo(eventID)
 {
-	var id = "#info-".concat(eventID);
-	$(id).slideUp(function(){
+	var id = "info-".concat(eventID);
+	$("#" + id).slideUp(function(){
 		redraw(id);
 	});
 	
