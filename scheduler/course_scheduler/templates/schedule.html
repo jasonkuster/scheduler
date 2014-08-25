@@ -52,15 +52,14 @@ $.getScript("{{ STATIC_URL }}js/jquery.cookie.js", function(){
 							<div class="row-fluid">
 								<div class="col-md-6 form-group">
 									<input class="form-control" onkeypress="return event.keyCode != 13;" type="text" id="{{ eventForm.event_title.id_for_tag }}" placeholder="Title"></input>
+									<input class="btn btn-primary" data-dismiss="modal" type="submit" value="Submit"></input>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<div class="form-group">
 							<input class="btn btn-primary" data-dismiss="modal" type="submit" value="Submit"></input>
-						</div>
 					</div>
 				</form>
 			</div>
