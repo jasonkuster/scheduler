@@ -50,7 +50,7 @@
 	width: calc(100%);
 }
 
-.scheduler-link
+#active-link
 {
 	color: #777;
 	outline: 0;
