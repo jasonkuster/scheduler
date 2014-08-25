@@ -56,6 +56,12 @@
 	outline: 0;
 }
 
+.scheduler-link:visited
+{
+	color: #777;
+	outline: 0;
+}
+
 .scheduler-container
 {
 	height: calc(100%);
