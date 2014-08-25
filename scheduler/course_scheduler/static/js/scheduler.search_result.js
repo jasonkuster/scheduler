@@ -49,14 +49,15 @@ function ShowInfo(eventID)
 	$("#info-".concat(eventID)).slideDown();
 }
 
+$.fn.redraw = function(){
+	  $(this).each(function(){
+	    var redraw = this.offsetHeight;
+	  });
+	};
+
 function HideInfo(eventID)
 {
 	$("#info-".concat(eventID)).slideUp();
 	$("#info-".concat(eventID)).redraw();
 }
 
-$.fn.redraw = function(){
-	  $(this).each(function(){
-	    var redraw = this.offsetHeight;
-	  });
-	};
