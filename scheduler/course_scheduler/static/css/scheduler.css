@@ -50,6 +50,11 @@
 	width: calc(100%);
 }
 
+a:focus
+{
+	color: #777
+}
+
 .scheduler-container
 {
 	height: calc(100%);
