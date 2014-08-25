@@ -40,19 +40,27 @@ $.getScript("{{ STATIC_URL }}js/jquery.cookie.js", function(){
 </head>
 
 <body>
-	<div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="event-modal-label" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Create Custom Event</h4>
-				</div>
-				<div class="modal-body">
-					HEY
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Submit</button>
-				</div>
+				<form action="/scheduler/customevent" method="post" class="form" role="form">{% csrf_token %}
+					<div class="modal-header">
+						<h4 class="modal-title" id="event-modal-label">Create Custom Event</h4>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<div class="row-fluid">
+								<div class="col-md-6 form-group">
+									<input class="form-control" type="text" id="{{ eventForm.event_title.id_for_tag }}" placeholder="Title"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" type="submit">Submit</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
