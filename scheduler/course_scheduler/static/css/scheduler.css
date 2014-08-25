@@ -50,10 +50,10 @@
 	width: calc(100%);
 }
 
-a.scheduler-link:focus
+#scheduler-link a:focus
 {
 	color: #777;
-	border: 0;
+	outline: 0;
 }
 
 .scheduler-container
