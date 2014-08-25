@@ -7,6 +7,9 @@ from django.shortcuts import render
 from django import forms
 from django.core.exceptions import ValidationError
 from course_scheduler.strings import Strings
+from django.http import HttpResponseRedirect
+from course_scheduler.models import *
+import datetime
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 import re
 import sys
@@ -56,8 +59,6 @@ def customevent(request):
                 loc = form.cleaned_data['location']
             except:
                 loc = ""
-
-            startTimeArr, endTimeArr = parse_time(time)
 
             dayStr = ''
             if form.cleaned_data['su']:
