@@ -6,7 +6,7 @@ Created on Aug 24, 2014
 from django.shortcuts import render
 from django import forms
 from course_scheduler.strings import Strings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from course_scheduler.models import *
 import datetime
 from django.views.decorators.csrf import csrf_protect
@@ -61,8 +61,9 @@ def customevent(request):
             stu = Student.objects.get(case_id=id)
             enroll = Enrollment(student_id=stu.pk, event_id=event.id)
             enroll.save()
-
-    return HttpResponseRedirect('/scheduler/')
+            return HttpResponseRedirect('/scheduler/')
+    return HttpResponseBadRequest('Custom Event Creation Failed')
+    
     
 
 
