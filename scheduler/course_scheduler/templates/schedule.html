@@ -51,7 +51,7 @@ $.getScript("{{ STATIC_URL }}js/jquery.cookie.js", function(){
 						<div class="container-fluid">
 							<div class="row-fluid">
 								<div class="col-md-6 form-group">
-									<input class="form-control" onkeypress="return false;" type="text" id="{{ eventForm.event_title.id_for_tag }}" placeholder="Title"></input>
+									<input class="form-control" onkeypress="return event.keyCode != 13;" type="text" id="{{ eventForm.event_title.id_for_tag }}" placeholder="Title"></input>
 								</div>
 							</div>
 						</div>
