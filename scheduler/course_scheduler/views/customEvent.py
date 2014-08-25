@@ -55,7 +55,7 @@ def customevent(request):
                 dayStr += 'Sa'
 
             #event = CustomEvent(start_time=datetime.time(startTimeArr[0], startTimeArr[1]), end_time=datetime.time(endTimeArr[0], endTimeArr[1]), recur_type=days, event_name=name)
-            event = CustomEvent(start_time=datetime.time(18, 00), end_time=datetime.time(20, 0), start_date=sdate, end_date=edate, recur_type=dayStr, event_name=name, location=loc)
+            event = CustomEvent(start_time=datetime.time(18, 00), end_time=datetime.time(20, 00), start_date=sdate, end_date=edate, recur_type=dayStr, event_name=name, location=loc)
             event.save()
 
             stu = Student.objects.get(case_id=id)
@@ -72,8 +72,14 @@ class EventForm(forms.Form):
     location=forms.CharField(max_length=100, required=False)
     start_time=forms.CharField(max_length=20)
     end_time=forms.CharField(max_length=20)
-    start_date=forms.DateField()
-    end_date=forms.DateField()
+    start_date=forms.DateField(widget=forms.TextInput(attrs=
+                                {
+                                    'class':'datepicker'
+                                }))
+    end_date=forms.DateField(widget=forms.TextInput(attrs=
+                                {
+                                    'class':'datepicker'
+                                }))
     #days=forms.CharField(max_length=14, validators=[validate_day])
     CHOICES=((0,'M'),(0,'Tu'),(0,'W'),(0,'Th'),(0,'F'),(0,'Sa'),(0,'Su'))
     m = forms.BooleanField(label="day", required=False)
