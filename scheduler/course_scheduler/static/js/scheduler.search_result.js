@@ -49,15 +49,24 @@ function ShowInfo(eventID)
 	$("#info-".concat(eventID)).slideDown();
 }
 
-$.fn.redraw = function(){
-	  $(this).each(function(){
-	    var redraw = this.offsetHeight;
-	  });
-	};
+function redraw(elementID)
+{
+	var element = document.getElementById(elementID);
+	var n = document.createTextNode(' ');
+	var disp = element.style.display;  // don't worry about previous display style
+	 
+	element.appendChild(n);
+	element.style.display = 'none';
+	 
+	setTimeout(function(){
+	    element.style.display = disp;
+	    n.parentNode.removeChild(n);
+	},20);
+}
 
 function HideInfo(eventID)
 {
 	$("#info-".concat(eventID)).slideUp();
-	$("#info-".concat(eventID)).redraw();
+	redraw("#info-".concat(eventID));
 }
 
