@@ -62,7 +62,7 @@ def customevent(request):
             enroll = Enrollment(student_id=stu.pk, event_id=event.id)
             enroll.save()
 
-            return HttpResponseRedirect('/scheduler/')
+    return HttpResponseRedirect('/scheduler/')
     
 
 
