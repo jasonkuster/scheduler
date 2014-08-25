@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django import forms
 from django.core.exceptions import ValidationError
 from course_scheduler.strings import Strings
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 import re
 import sys
 
@@ -14,49 +15,6 @@ sys.path.append(Strings.SYSTEM_PATH_PREFIX + 'application/scheduler/cas/')
 from checklogin import check_login
 from checklogin import redirect_to_cas
 
-
-def parse_time(array):
-    timeArr = array.split('-')
-    timeArr[0]=re.sub(r'( )+', "", timeArr[0])
-    timeArr[1]=re.sub(r'( )+', "", timeArr[1])
-
-    startTimeArr = timeArr[0].split(':')
-    startTimeArr[1] = startTimeArr[1][:2]
-    startTimeArr[0] = int(startTimeArr[0])
-    startTimeArr[1] = int(startTimeArr[1])
-    if 'pm' in timeArr[0] or 'PM' in timeArr[0]:
-        if startTimeArr != 12:
-            startTimeArr[0] = startTimeArr[0] + 12
-
-    endTimeArr = timeArr[1].split(':')
-    endTimeArr[1] = endTimeArr[1][:2]
-    endTimeArr[0] = int(endTimeArr[0])
-    endTimeArr[1] = int(endTimeArr[1])
-    if 'pm' in timeArr[1] or 'PM' in timeArr[1]:
-        if endTimeArr != 12:
-            endTimeArr[0] = endTimeArr[0] + 12
-    return startTimeArr, endTimeArr
-    
-def validate_time(value):
-    validAMs = '([6-9]|10|11|12):[0-5][0-9](am|AM)'
-    validPMs = '([1-9]|12):[0-5][0-9](pm|PM)'
-    validTimes = '(' + validAMs + '( )*-( )*' + validAMs + ')|(' + validAMs + '( )*-( )*' + validPMs + ')|(' + validPMs + '( )*-( )*' + validPMs + ')'
-
-    patt = re.compile(validTimes)
-    if not patt.match(value):
-        raise ValidationError('%s is not a valid time format!' % value)
-
-    if not ""==(re.sub(validTimes, "", value)):
-        raise ValidationError('%s is not a valid time format!' % value)
-
-    startTimeArr, endTimeArr = parse_time(value)
-
-    actSTime = startTimeArr[0] + startTimeArr[1] / 60.0
-    actETime = endTimeArr[0] + endTimeArr[1] / 60.0
-
-    if actSTime >= actETime:
-        raise ValidationError('Start Time must be after end Time!')
-    
 def schedule(request):
     #check to see if the user is logged in
     #if not make the user login
@@ -74,10 +32,69 @@ def schedule(request):
         response.__setitem__('Set-Cookie', cookie)
     return response
 
+@csrf_protect
+def customevent(request):
+    #check to see if the user is logged in
+    #if not make the user login
+    status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/instructor/')
+    setcookie = False
+    if status == False:
+        return redirect_to_cas('http://scheduler.acm.case.edu/scheduler/instructor/')
+    if cookie != "":
+        setcookie = True
+
+    if request.method == "POST":
+        form = EventForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['event_title']
+            start_time = form.cleaned_data['start_time']
+            end_time = form.cleaned_data['end_time']
+            sdate = form.cleaned_data['start_date']
+            edate = form.cleaned_data['end_date']
+
+            try:
+                loc = form.cleaned_data['location']
+            except:
+                loc = ""
+
+            startTimeArr, endTimeArr = parse_time(time)
+
+            dayStr = ''
+            if form.cleaned_data['su']:
+                dayStr += 'Su'
+            if form.cleaned_data['m']:
+                dayStr += 'M'
+            if form.cleaned_data['tu']:
+                dayStr += 'Tu'
+            if form.cleaned_data['w']:
+                dayStr += 'W'
+            if form.cleaned_data['th']:
+                dayStr += 'Th'
+            if form.cleaned_data['f']:
+                dayStr += 'F'
+            if form.cleaned_data['sa']:
+                dayStr += 'Sa'
+
+            if '' == dayStr:
+                return render(request, 'custom.html', {'id' : id, 'form' : form, 'dayErr' : True})
+
+            #event = CustomEvent(start_time=datetime.time(startTimeArr[0], startTimeArr[1]), end_time=datetime.time(endTimeArr[0], endTimeArr[1]), recur_type=days, event_name=name)
+            event = CustomEvent(start_time=datetime.time(start_time, end_time), end_time=datetime.time(endTimeArr[0], endTimeArr[1]), start_date=sdate, end_date=edate, recur_type=dayStr, event_name=name, location=loc)
+            event.save()
+
+            stu = Student.objects.get(case_id=id)
+            enroll = Enrollment(student_id=stu.pk, event_id=event.id)
+            enroll.save()
+
+            return HttpResponseRedirect('/scheduler/')
+    
+
+
 class EventForm(forms.Form):
     event_title=forms.CharField(max_length=100)
     location=forms.CharField(max_length=100, required=False)
-    times=forms.CharField(max_length=20, validators=[validate_time])
+    start_time=forms.CharField(max_length=20)
+    end_time=forms.CharField(max_length=20)
     start_date=forms.DateField()
     end_date=forms.DateField()
     #days=forms.CharField(max_length=14, validators=[validate_day])
