@@ -49,27 +49,7 @@ function ShowInfo(eventID)
 	$("#info-".concat(eventID)).slideDown();
 }
 
-function redraw(elementID)
-{
-	var element = document.getElementById(elementID);
-	var n = document.createTextNode(' ');
-	var disp = element.style.display;  // don't worry about previous display style
-	 
-	element.appendChild(n);
-	element.style.display = 'none';
-	 
-	setTimeout(function(){
-	    element.style.display = disp;
-	    n.parentNode.removeChild(n);
-	},20);
-}
-
 function HideInfo(eventID)
 {
-	var id = "info-".concat(eventID);
-	$("#" + id).slideUp(function(){
-		redraw(id);
-	});
-	
+	$("#info-".concat(eventID)).slideUp();
 }
-
