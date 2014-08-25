@@ -51,5 +51,12 @@ function ShowInfo(eventID)
 
 function HideInfo(eventID)
 {
-	$("#info-".concat(eventID)).slideUp(function() {$("#info-".concat(eventID)).hide();});
+	$("#info-".concat(eventID)).slideUp();
+	$("#info-".concat(eventID)).redraw();
 }
+
+$.fn.redraw = function(){
+	  $(this).each(function(){
+	    var redraw = this.offsetHeight;
+	  });
+	};
