@@ -31,6 +31,10 @@ $.getScript("{{ STATIC_URL }}js/jquery.cookie.js", function(){
 	});
 </script>
 <script>
+$('#event-modal').on('show', function () {
+    $.fn.modal.Constructor.prototype.enforceFocus = function () { };
+});
+
 $.getScript("{{ STATIC_URL }}jquery-ui/jquery-ui.min.js", function() {
 	$(".datepicker").datepicker({
 	      changeMonth: true,
