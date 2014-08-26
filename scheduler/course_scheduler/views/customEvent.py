@@ -96,13 +96,13 @@ class EventForm(forms.Form):
                                 }))
     start_date=forms.DateField(widget=forms.TextInput(attrs=
                                 {
-                                    'class' : 'form-control',
+                                    'class' : 'form-control datepicker',
                                     'onkeypress' : 'return event.keyCode != 13;',
                                     'placeholder':'Start Date'
                                 }))
     end_date=forms.DateField(widget=forms.TextInput(attrs=
                                 {
-                                    'class' : 'form-control',
+                                    'class' : 'form-control datepicker',
                                     'onkeypress' : 'return event.keyCode != 13;',
                                     'placeholder':'End Date'
                                 }))
