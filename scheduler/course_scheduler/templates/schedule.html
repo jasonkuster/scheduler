@@ -14,7 +14,7 @@
 <link rel='stylesheet' href='/static/js/fullcalendar/fullcalendar.print.css' type="text/css" media="print"/>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="{{ STATIC_URL }}jquery-2.1.1.min.js"></script>
 <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 <script src="{{ STATIC_URL }}js/scheduler.search.js"></script>
 <script src="{{ STATIC_URL }}jquery-ui/jquery-ui.min.js"></script>
@@ -31,15 +31,19 @@ $.getScript("{{ STATIC_URL }}js/jquery.cookie.js", function(){
 	});
 </script>
 <script>
+$.getScript("{{ STATIC_URL }}jquery-ui/jquery-ui.min.js", function() {
+	$(".datepicker").datepicker({
+	      changeMonth: true,
+	      changeYear: true,
+	      yearRange: "1900:2012",
+	      // You can put more options here.
+
+	    });
+});
+
 function ToggleDatepicker()
 {
-    $(".datepicker").datepicker({
-      changeMonth: true,
-      changeYear: true,
-      yearRange: "1900:2012",
-      // You can put more options here.
-
-    });
+	$(".datepicker").datepicker("show");
 }
   </script>
 
