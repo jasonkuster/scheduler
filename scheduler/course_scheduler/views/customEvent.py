@@ -68,10 +68,32 @@ def customevent(request):
 
 
 class EventForm(forms.Form):
-    event_title=forms.CharField(max_length=100)
-    location=forms.CharField(max_length=100, required=False)
-    start_time=forms.CharField(max_length=20)
-    end_time=forms.CharField(max_length=20)
+    event_title=forms.CharField(widget=forms.TextInput(attrs=
+                                {
+                                    'class' : 'form-control',
+                                    'onkeypress' : 'return event.keyCode != 13;',
+                                    'placeholder':'Title'
+                                }))
+    location=forms.CharField(widget=forms.TextInput(attrs=
+                                {
+                                    'class' : 'form-control',
+                                    'onkeypress' : 'return event.keyCode != 13;',
+                                    'placeholder':'Location'
+                                }))
+    start_time=forms.CharField(widget=forms.TextInput(attrs=
+                                {
+                                    'class' : 'form-control',
+                                    'onkeypress' : 'return event.keyCode != 13;',
+                                    'placeholder':'Start Time',
+                                    'type' : 'time'
+                                }))
+    end_time=forms.CharField(widget=forms.TextInput(attrs=
+                                {
+                                    'class' : 'form-control',
+                                    'onkeypress' : 'return event.keyCode != 13;',
+                                    'placeholder':'End Time',
+                                    'type' : 'time'
+                                }))
     start_date=forms.DateField(widget=forms.TextInput(attrs=
                                 {
                                     'class' : 'form-control',
