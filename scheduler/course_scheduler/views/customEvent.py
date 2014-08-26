@@ -32,6 +32,9 @@ def customevent(request):
             end_time = form.cleaned_data['end_time']
             sdate = form.cleaned_data['start_date']
             edate = form.cleaned_data['end_date']
+            
+            startTimeArr = parse_time(start_time)
+            endTimeArr = parse_time(end_time)
 
             try:
                 loc = form.cleaned_data['location']
@@ -55,7 +58,7 @@ def customevent(request):
                 dayStr += 'Sa'
 
             #event = CustomEvent(start_time=datetime.time(startTimeArr[0], startTimeArr[1]), end_time=datetime.time(endTimeArr[0], endTimeArr[1]), recur_type=days, event_name=name)
-            event = CustomEvent(start_time=datetime.time(18, 00), end_time=datetime.time(20, 00), start_date=sdate, end_date=edate, recur_type=dayStr, event_name=name, location=loc)
+            event = CustomEvent(start_time=datetime.time(startTimeArr[0], startTimeArr[1]), end_time=datetime.time(endTimeArr[0], endTimeArr[1]), start_date=sdate, end_date=edate, recur_type=dayStr, event_name=name, location=loc)
             event.save()
 
             stu = Student.objects.get(case_id=id)
@@ -66,7 +69,16 @@ def customevent(request):
     #response['submittedForm'] = form
     return response
     
-    
+def parse_time(timeArr):
+    startTimeArr = timeArr.split(':')
+    startTimeArr[1] = startTimeArr[1][:2]
+    startTimeArr[0] = int(startTimeArr[0])
+    startTimeArr[1] = int(startTimeArr[1])
+    if 'pm' in timeArr or 'PM' in timeArr:
+        if startTimeArr[0] < 12:
+            startTimeArr[0] = startTimeArr[0] + 12
+
+    return startTimeArr
 
 
 class EventForm(forms.Form):
