@@ -74,11 +74,15 @@ class EventForm(forms.Form):
     end_time=forms.CharField(max_length=20)
     start_date=forms.DateField(widget=forms.TextInput(attrs=
                                 {
-                                    'class':'scheduler-datepicker'
+                                    'class' : 'form-control',
+                                    'onkeypress' : 'return event.keyCode != 13;',
+                                    'placeholder':'Start Date'
                                 }))
     end_date=forms.DateField(widget=forms.TextInput(attrs=
                                 {
-                                    'class':'scheduler-datepicker'
+                                    'class' : 'form-control',
+                                    'onkeypress' : 'return event.keyCode != 13;',
+                                    'placeholder':'End Date'
                                 }))
     #days=forms.CharField(max_length=14, validators=[validate_day])
     CHOICES=((0,'M'),(0,'Tu'),(0,'W'),(0,'Th'),(0,'F'),(0,'Sa'),(0,'Su'))

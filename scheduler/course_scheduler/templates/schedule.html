@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}print.css" type="text/css" media="print" />
 <link rel='stylesheet' href='/static/js/fullcalendar/fullcalendar.css'/>
 <link rel='stylesheet' href='/static/js/fullcalendar/fullcalendar.print.css' type="text/css" media="print"/>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 <script src="{{ STATIC_URL }}jquery-2.1.1.min.js"></script>
 <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
@@ -81,10 +82,14 @@ $.getScript("{{ STATIC_URL }}jquery-ui/jquery-ui.js", function() {
 							</div>
 							<div class="row-fluid">
 								<div class="col-md-6 form-group">
-									{{ eventForm.start_date }}
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-calendar"></i>
+										</div>
+										{{ eventForm.start_date }}
+									</div>
 								</div>
-								<div class="col-md-6 form-group">
-									{{ eventForm.end_date }}
+								<div class="col-md-6 form-group">{{ eventForm.end_date }}
 								</div>
 							</div>
 							<div class="row-fluid">
