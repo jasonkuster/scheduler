@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, intial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/scheduler.css">
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}jquery-ui/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}jquery-ui/jquery-ui.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}print.css" type="text/css" media="print" />
 <link rel='stylesheet' href='/static/js/fullcalendar/fullcalendar.css'/>
 <link rel='stylesheet' href='/static/js/fullcalendar/fullcalendar.print.css' type="text/css" media="print"/>
@@ -29,7 +29,7 @@ $.getScript("{{ STATIC_URL }}js/jquery.cookie.js", function(){
 	});
 </script>
 <script>
-$.getScript("{{ STATIC_URL }}jquery-ui/jquery-ui.min.js", function() {
+$.getScript("{{ STATIC_URL }}jquery-ui/jquery-ui.js", function() {
     $(".ui-datepicker").datepicker({
       changeMonth: true,
       changeYear: true,
