@@ -99,24 +99,19 @@ def event_json(request):
         event = Event.objects.get(id=enroll.event_id)
         start = request.GET.get('start', None)
         end = request.GET.get('end', None)
-        #if start != None && end != None:
+
         start_date = dateutil.parser.parse(start)
         end_date = dateutil.parser.parse(end)
-        #    if event.start_date < :
-        #        event_data['start'] = str(event.start_date.isoformat()) + 'T' + str(event.start_time.isoformat())
-        #        event_data['end'] = str(event.end_date.isoformat()) + 'T' + str(event.end_time.isoformat())
-        #        response_data.append(event_data)
-        #else:
-        #  raise Http404
+
         date_to_start = event.start_date if event.start_date > start_date.date() else start_date.date()
         date_to_end = event.end_date if event.end_date < end_date.date() else end_date.date()
 
         for dt in rrule.rrule(rrule.DAILY, dtstart=date_to_start, until=date_to_end):
             event_data = {}
             event_data['id'] = enroll.event_id
-            if event.meetingtime:
+	    try:
                 event_data['title'] = event.meetingtime.meeting_class.dept + ' ' + str(event.meetingtime.meeting_class.class_number)
-            else:
+            except Exception:
                 event_data['title'] = event.customevent.event_name
             event_data['allDay'] = False
 
