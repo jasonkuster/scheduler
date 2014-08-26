@@ -23,7 +23,7 @@ def customevent(request):
     status, id, cookie = check_login(request, 'http://scheduler.acm.case.edu/scheduler/instructor/')
     if status == False:
         return redirect_to_cas('http://scheduler.acm.case.edu/scheduler/instructor/')
-
+    form = None
     if request.method == "POST":
         form = EventForm(request.POST)
         if form.is_valid():
@@ -62,7 +62,9 @@ def customevent(request):
             enroll = Enrollment(student_id=stu.pk, event_id=event.id)
             enroll.save()
             return HttpResponseRedirect('/scheduler/')
-    return HttpResponseBadRequest('Custom Event Creation Failed')
+    response = HttpResponseBadRequest('Custom Event Creation Failed')
+    response['submittedForm'] = form
+    return response
     
     
 
