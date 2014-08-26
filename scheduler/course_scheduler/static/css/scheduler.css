@@ -62,7 +62,7 @@
 	width: calc(100%);
 }
 
-.scheduler-datepicker
+.datepicker
 {
-	display: block;
+	z-index: 1151;
 }
