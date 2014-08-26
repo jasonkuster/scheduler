@@ -62,7 +62,7 @@ function ToggleDatepicker()
 </head>
 
 <body>
-	<div class="modal fade" id="event-modal" role="dialog" aria-labelledby="event-modal-label" aria-hidden="true">
+	<div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="event-modal-label" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form action="/scheduler/customevent" method="post" class="form" role="form">{% csrf_token %}
