@@ -63,7 +63,7 @@ def customevent(request):
             enroll.save()
             return HttpResponseRedirect('/scheduler/')
     response = HttpResponseBadRequest('Custom Event Creation Failed')
-    response['submittedForm'] = form
+    #response['submittedForm'] = form
     return response
     
     
